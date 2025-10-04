@@ -1,113 +1,116 @@
-# Vite React Tailwind Starter
-![Screenshots](https://i.imgur.com/vlZMdj3.png)
+# React + Tailwind Modern Web Application
 
+A fully custom-built, high-performance React application powered by **Vite** and styled with **Tailwind CSS**.  
+This project has been **completely developed from scratch**, featuring unique design, structure, and components — not based on any pre-existing template.
 
-This is a [Vite](https://vitejs.dev/), [React](https://reactjs.org/) and [Tailwind CSS](https://tailwindcss.com/) project bootstrapped using vite-react-tailwind-starter created by [Theodorus Clarence](https://github.com/theodorusclarence/vite-react-tailwind-starter).
-- 💡 Instant Server Start
-- ⚡️ Lightning Fast HMR
-- 🛠️ Rich Features
-- 📦 Optimized Build
-- 🔩 Universal Plugin Interface
-- 🔑 Fully Typed APIs
+---
 
-See the deployment on [https://vite-react-tailwind-starter.theodorusclarence.com/](https://vite-react-tailwind-starter.theodorusclarence.com/)
+## 🚀 Features
 
+- ⚡ **Vite-Powered** – Ultra-fast bundling and hot module replacement (HMR)
+- 🎨 **Tailwind CSS** – Utility-first styling with responsive and modern UI
+- ⚛️ **React 18** – Component-based architecture for scalability and maintainability
+- 🧩 **Modular Structure** – Organized folders for components, pages, and assets
+- 🌐 **Responsive Design** – Optimized for all screen sizes
+- 🔄 **Reusable Components** – Clean and scalable code for long-term projects
+- 🧠 **Custom Hooks & Logic** – Built specifically for this project’s requirements
 
-## Installation
+---
 
-### Clone the template
+## 📂 Project Structure
 
-To clone this template you can use one of the three ways:
+├── public/ # Static assets (images, icons, etc.)
+├── src/
+│ ├── assets/ # Images, fonts, and static resources
+│ ├── components/ # Reusable UI components
+│ ├── pages/ # Page-level components
+│ ├── styles/ # Tailwind and global CSS files
+│ ├── App.jsx # Main React component
+│ ├── main.jsx # Application entry point
+│ └── router/ # React Router configuration (if used)
+├── package.json
+├── tailwind.config.js
+├── vite.config.js
+└── README.md
 
+---
 
-#### 1. Use npx degit
+## 🛠️ Installation & Setup
+
+### 1. Clone the Repository
+
 ```bash
-npx degit https://github.com/theodorusclarence/vite-react-tailwind-starter my-app
-```
-replace `my-app` with your application name
-
-
-#### 2. Use this repository as a template
-
-![Use as template](https://i.imgur.com/I6aThUJ.png)
-
-
-#### 3. Deploy to vercel
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Ftheodorusclarence%2Fvite-react-tailwind-starter)
-
-
-### Running The Application
-First, install all the dependencies,
-```bash
-npm i
+git clone https://github.com/Mudassirahmedgithub/neo-enterprises_web.git
+cd <Mudassirahmedgithub/neo-enterprises_web>
+2. Install Dependencies
+npm install
 # or
-yarn
-```
+yarn install
 
-Then, run the development server:
-
-```bash
+3. Start the Development Server
 npm run dev
 # or
 yarn dev
+
+
+Now open your browser and visit:
+
+http://localhost:5173
+
+🧱 Tech Stack
+Technology	Purpose
+React	Frontend library
+Vite	Development and build tool
+Tailwind CSS	Styling framework
+PostCSS	CSS transformations
+ESLint	Code linting and standards
+🎨 Design & Aesthetic Choices
+
+This project emphasizes:
+
+Consistent color gradients
+
+Clean typography
+
+Subtle animations and transitions
+
+Responsive flex and grid layouts
+
+Scalable design tokens for future branding
+
+🧰 Available Scripts
+Command	Description
+npm run dev	Starts local development server
+npm run build	Builds production-optimized files
+npm run preview	Previews the production build
+npm run lint	Runs ESLint checks
+🌍 Deployment
+
+You can deploy this project easily to:
+
+Vercel
+
+Netlify
+
+GitHub Pages
+
+For Vercel:
+
+Push your project to GitHub
+
+Go to vercel.com/new
+
+Import your repository and deploy instantly
+
+
+
+🧑‍💻 Author
+
+Developed and customized entirely by [Mudassir_ahmed]
+Built with ❤️ using React, Vite, and Tailwind CSS.
+
+📜 License
+
+This project is proprietary and original — not based on any external starter or boilerplate.
+You may adapt or reference portions under fair use with proper credit.
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-![Finished Build](https://i.imgur.com/c9P343j.png)
-
-You can start editing the page by modifying `pages/Home.jsx`. The page auto-updates as you edit the file.
-
-## What's Inside
-
-### Absolute import
-
-You can absolute import by using `@/`
-
-For example
-```jsx
-import UnstyledLink from '@/components/UnstyledLink'
-```
-You can also use auto import and it should work automatically.
-
-When you add a new folder in src, add it on the `jsconfig.json`
-```json
-{
-  "compilerOptions": {
-    "jsx": "preserve",
-    "baseUrl": "./src",
-    "paths": {
-      "@/components/*": ["./components/*"],
-      "@/pages/*": ["./pages/*"],
-      "@/routes/*": ["./routes/*"],
-      // add new folder here
-    },
-  },
-}
-```
-
-### Inter Fonts
-
-Inter fonts is self hosted. The default weights are `400, 600, 700`. To add more, use fontsquirrel.
-
-### UnstyledLink Component
-Used as a component for Next.js Link. Will render out Next/Link if the href started with `/` or `#`, else will render an `a` tag with `target='_blank'`.
-
-### CustomLink Component
-An extension of UnstyledLink Component, you can add your default styling for a button/link.
-```jsx
-<UnstyledLink
-      className={`${props.className} inline-flex items-center font-bold hover:text-primary-400`}
-      {...props}
-/>
-```
-
-### Default Favicon Declaration
-Use [Favicon Generator](https://www.favicon-generator.org/) and then overwrite the files in `/public/favicon`
-
-### Just-In-Time Tailwindcss
-Defaulted to true, you can uncomment the `mode='jit'` in `/tailwind.config.js`
-
-### Default Styles
-There are default styles for responsive heading sizes, and `.layout` to support a max-width for larger screen size.
