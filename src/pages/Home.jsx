@@ -1,8 +1,9 @@
 // src/pages/Home.jsx
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import countries from '../data/countries';
+
+// Image Slider Data
 const sliderImages = [
   {
     src: '/images/products/Cardamom1.jpg',
@@ -14,7 +15,6 @@ const sliderImages = [
     caption: 'Flax Seeds',
     slug: 'flax',
   },
-
   {
     src: '/images/products/blackPepper1.jpg',
     caption: 'Black Pepper',
@@ -25,11 +25,7 @@ const sliderImages = [
     caption: 'Soyabean Meal',
     slug: 'soyabeanMeal',
   },
-  {
-    src: '/images/products/clove1.jpg',
-    caption: 'Clove',
-    slug: 'clove',
-  },
+  { src: '/images/products/clove1.jpg', caption: 'Clove', slug: 'clove' },
   {
     src: '/images/products/lotusSeeds1.jpg',
     caption: 'Makhana',
@@ -63,11 +59,7 @@ const latestProducts = [
     name: 'Soyabean Flakes',
     slug: 'Soyabeen',
   },
-  {
-    src: '/images/products/clove.png',
-    name: 'Clove',
-    slug: 'clove',
-  },
+  { src: '/images/products/clove.png', name: 'Clove', slug: 'clove' },
 ];
 
 const popularProducts = [
@@ -76,16 +68,8 @@ const popularProducts = [
     name: 'Natural Granite',
     slug: 'granite',
   },
-  {
-    src: '/images/products/cardamom.png',
-    name: 'Cardamom',
-    slug: 'cardomon',
-  },
-  {
-    src: '/images/products/flax-seeds.png',
-    name: 'Flax Seeds',
-    slug: 'flax',
-  },
+  { src: '/images/products/cardamom.png', name: 'Cardamom', slug: 'cardomon' },
+  { src: '/images/products/flax-seeds.png', name: 'Flax Seeds', slug: 'flax' },
   {
     src: '/images/products/lotusSeeds.png',
     name: 'Makhana',
@@ -93,6 +77,7 @@ const popularProducts = [
   },
 ];
 
+// Image Slider Component
 function ImageSlider() {
   const [current, setCurrent] = useState(0);
 
@@ -103,23 +88,16 @@ function ImageSlider() {
     return () => clearTimeout(timer);
   }, [current]);
 
-  const nextSlide = () => {
-    setCurrent((prev) => (prev + 1) % sliderImages.length);
-  };
-
-  const prevSlide = () => {
-    setCurrent(
-      (prev) => (prev - 1 + sliderImages.length) % sliderImages.length,
-    );
-  };
-
   return (
     <div className='relative w-full h-[calc(100vh-100px)] bg-black overflow-hidden'>
-      {/* Navigation Buttons */}
+      {/* Prev Button */}
       <button
-        onClick={prevSlide}
-        className='absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-90 text-gray-800 w-10 h-10 rounded-full flex items-center justify-center z-10 transition-all duration-300'
-        aria-label='Previous image'
+        onClick={() =>
+          setCurrent(
+            (prev) => (prev - 1 + sliderImages.length) % sliderImages.length,
+          )
+        }
+        className='absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-90 text-gray-800 w-10 h-10 rounded-full flex items-center justify-center z-10'
       >
         <svg
           className='w-6 h-6'
@@ -136,10 +114,10 @@ function ImageSlider() {
         </svg>
       </button>
 
+      {/* Next Button */}
       <button
-        onClick={nextSlide}
-        className='absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-90 text-gray-800 w-10 h-10 rounded-full flex items-center justify-center z-10 transition-all duration-300'
-        aria-label='Next image'
+        onClick={() => setCurrent((prev) => (prev + 1) % sliderImages.length)}
+        className='absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-90 text-gray-800 w-10 h-10 rounded-full flex items-center justify-center z-10'
       >
         <svg
           className='w-6 h-6'
@@ -156,36 +134,33 @@ function ImageSlider() {
         </svg>
       </button>
 
-      {/* Clickable Image that navigates to product page */}
+      {/* Image */}
       <Link to={`/products/${sliderImages[current].slug}`}>
         <img
           src={sliderImages[current].src}
-          alt={`Banner ${current + 1}`}
+          alt={sliderImages[current].caption}
           className='w-full h-full object-cover aspect-[16/9] cursor-pointer transition-transform duration-500'
         />
       </Link>
 
-      {/* Slide Indicators */}
+      {/* Indicators */}
       <div className='absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10'>
-        {sliderImages.map((_, index) => (
+        {sliderImages.map((_, i) => (
           <button
-            key={index}
-            onClick={() => setCurrent(index)}
+            key={i}
+            onClick={() => setCurrent(i)}
             className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              index === current
-                ? 'bg-white scale-125'
-                : 'bg-white bg-opacity-50 hover:bg-opacity-75'
+              i === current ? 'bg-white scale-125' : 'bg-white bg-opacity-50'
             }`}
-            aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>
 
       {/* Caption */}
-      <div className='absolute bottom-20 left-1/2 transform -translate-x-1/2 bg-white bg-opacity-90 px-8 py-4 rounded shadow-lg text-2xl font-semibold text-gray-900 transition-opacity duration-500'>
+      <div className='absolute bottom-20 left-1/2 transform -translate-x-1/2 bg-white bg-opacity-90 px-8 py-4 rounded shadow-lg text-2xl font-semibold text-gray-900'>
         <Link
           to={`/products/${sliderImages[current].slug}`}
-          className='hover:text-yellow-600 transition-colors duration-300'
+          className='hover:text-yellow-600'
         >
           {sliderImages[current].caption}
         </Link>
@@ -194,239 +169,263 @@ function ImageSlider() {
   );
 }
 
+// Main Home Page Component
 export default function Home() {
+  const [formData, setFormData] = useState({
+    product: '',
+    country: '',
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
+  });
+  const [status, setStatus] = useState({
+    loading: false,
+    success: null,
+    error: null,
+  });
+
+  // handle input change
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  // handle form submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus({ loading: true, success: null, error: null });
+
+    try {
+      const res = await fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          formType: 'Quick Enquiry',
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+          productName: formData.product,
+          pageUrl: window.location.pathname,
+        }),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        setStatus({
+          loading: false,
+          success: 'Form submitted successfully!',
+          error: null,
+        });
+        setFormData({
+          product: '',
+          country: '',
+          name: '',
+          email: '',
+          phone: '',
+          message: '',
+        });
+      } else {
+        throw new Error(data.message || 'Submission failed');
+      }
+    } catch (err) {
+      setStatus({ loading: false, success: null, error: err.message });
+    }
+  };
+
   return (
     <main>
-      {/* Slider Section - This will be right below the header */}
+      {/* Slider */}
       <section className='bg-gray-100'>
         <ImageSlider />
       </section>
 
       {/* Latest Products */}
-      <section className='py-12 bg-white'>
-        <div className='container mx-auto text-center'>
-          <h2 className='text-3xl font-bold mb-8 text-gray-800'>
-            Latest Products
-          </h2>
-          <div className='grid grid-cols-2 md:grid-cols-4 gap-6'>
-            {latestProducts.map((product) => (
-              <Link
-                key={product.name}
-                to={`/products/${product.slug}`}
-                className='group'
-              >
-                <div className='bg-white rounded-lg shadow-md p-4 transition-all duration-300 hover:shadow-xl hover:scale-105 border border-gray-200'>
-                  <div className='overflow-hidden rounded-md mb-3'>
-                    <img
-                      src={product.src}
-                      alt={product.name}
-                      className='w-full h-32 object-cover transition-transform duration-300 group-hover:scale-110'
-                    />
-                  </div>
-                  <div className='font-semibold text-gray-700 group-hover:text-yellow-600 transition-colors duration-300'>
-                    {product.name}
-                  </div>
+      <section className='py-12 bg-white text-center'>
+        <h2 className='text-3xl font-bold mb-8 text-gray-800'>
+          Latest Products
+        </h2>
+        <div className='grid grid-cols-2 md:grid-cols-4 gap-6'>
+          {latestProducts.map((p) => (
+            <Link key={p.name} to={`/products/${p.slug}`} className='group'>
+              <div className='bg-white rounded-lg shadow-md p-4 hover:shadow-xl hover:scale-105 transition-all border border-gray-200'>
+                <div className='overflow-hidden rounded-md mb-3'>
+                  <img
+                    src={p.src}
+                    alt={p.name}
+                    className='w-full h-32 object-cover group-hover:scale-110 transition-transform'
+                  />
                 </div>
-              </Link>
-            ))}
-          </div>
+                <div className='font-semibold text-gray-700 group-hover:text-yellow-600'>
+                  {p.name}
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 
       {/* Popular Products */}
-      <section className='py-12 bg-gray-50'>
-        <div className='container mx-auto text-center'>
-          <h2 className='text-3xl font-bold mb-8 text-gray-800'>
-            Popular Products
-          </h2>
-          <div className='grid grid-cols-2 md:grid-cols-4 gap-6'>
-            {popularProducts.map((product) => (
-              <Link
-                key={product.name}
-                to={`/products/${product.slug}`}
-                className='group'
-              >
-                <div className='bg-white rounded-lg shadow-md p-4 transition-all duration-300 hover:shadow-xl hover:scale-105 border border-gray-200'>
-                  <div className='overflow-hidden rounded-md mb-3'>
-                    <img
-                      src={product.src}
-                      alt={product.name}
-                      className='w-full h-32 object-cover transition-transform duration-300 group-hover:scale-110'
-                    />
-                  </div>
-                  <div className='font-semibold text-gray-700 group-hover:text-yellow-600 transition-colors duration-300'>
-                    {product.name}
-                  </div>
+      <section className='py-12 bg-gray-50 text-center'>
+        <h2 className='text-3xl font-bold mb-8 text-gray-800'>
+          Popular Products
+        </h2>
+        <div className='grid grid-cols-2 md:grid-cols-4 gap-6'>
+          {popularProducts.map((p) => (
+            <Link key={p.name} to={`/products/${p.slug}`} className='group'>
+              <div className='bg-white rounded-lg shadow-md p-4 hover:shadow-xl hover:scale-105 transition-all border border-gray-200'>
+                <div className='overflow-hidden rounded-md mb-3'>
+                  <img
+                    src={p.src}
+                    alt={p.name}
+                    className='w-full h-32 object-cover group-hover:scale-110 transition-transform'
+                  />
                 </div>
-              </Link>
-            ))}
-          </div>
+                <div className='font-semibold text-gray-700 group-hover:text-yellow-600'>
+                  {p.name}
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 
-      {/* Glimpse Section */}
-      <section className='bg-gradient-to-r from-yellow-100 to-white py-12'>
-        <div className='container mx-auto text-center'>
-          <h2 className='text-3xl font-bold mb-8 border-b-4 border-yellow-500 inline-block pb-2 text-gray-800'>
-            Glimpse of Our Company
-          </h2>
-          <div className='grid grid-cols-2 md:grid-cols-4 gap-6 text-dark'>
-            <div className='p-6 bg-white shadow-lg rounded-lg transition-all duration-300 hover:shadow-xl'>
-              <span className='font-bold text-yellow-600'>
-                Nature of Business:
-              </span>
-              <br className='md:hidden' />
-              Manufacturers, Supplier, Exporters
-            </div>
-            <div className='p-6 bg-white shadow-lg rounded-lg transition-all duration-300 hover:shadow-xl'>
-              <span className='font-bold text-yellow-600'>Employees:</span>
-              <br className='md:hidden' />
-              60 Employees
-            </div>
-            <div className='p-6 bg-white shadow-lg rounded-lg transition-all duration-300 hover:shadow-xl'>
-              <span className='font-bold text-yellow-600'>
-                Year Established:
-              </span>
-              <br className='md:hidden' />
-              2022
-            </div>
-            <div className='p-6 bg-white shadow-lg rounded-lg transition-all duration-300 hover:shadow-xl'>
-              <span className='font-bold text-yellow-600'>Market Covered:</span>
-              <br className='md:hidden' />
-              Worldwide
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className='py-12 bg-yellow-100'>
-        <div className='container mx-auto text-center'>
-          <p className='mb-6 text-xl font-semibold text-gray-700 max-w-4xl mx-auto'>
-            In promotion and advertising, a testimonial consists of a person's
-            experience in a written statement extolling the integrity of a
-            product or services.
-          </p>
-          <Link to='/testimonials'>
-            <button className='bg-yellow-500 hover:bg-yellow-600 px-6 py-3 rounded-lg font-bold text-white transition-all duration-300 hover:scale-105 shadow-md'>
-              Post Your Testimonials
-            </button>
-          </Link>
-        </div>
-      </section>
-
-      {/* Quick Enquiry Form */}
+      {/* Quick Enquiry */}
       <section className='py-12 bg-white'>
         <div className='container mx-auto'>
           <h2 className='text-3xl font-bold mb-8 text-center text-gray-800'>
             Quick Enquiry
           </h2>
           <div className='flex flex-col lg:flex-row items-center justify-center gap-8 max-w-6xl mx-auto'>
-            {/* Image Section */}
+            {/* Image */}
             <div className='lg:w-1/2 w-full'>
-              <div className='rounded-lg overflow-hidden shadow-xl'>
-                <img
-                  src='/images/products/enquiry.png'
-                  alt='Enquiry'
-                  className='w-full h-64 lg:h-96 object-cover transition-transform duration-300 hover:scale-105'
-                />
-              </div>
+              <img
+                src='/images/products/enquiry.png'
+                alt='Enquiry'
+                className='rounded-lg shadow-xl w-full h-64 lg:h-96 object-cover'
+              />
             </div>
 
-            {/* Form Section */}
+            {/* Form */}
             <div className='lg:w-1/2 w-full'>
-              <form className='space-y-6 bg-white p-6 rounded-xl shadow-md'>
-                {/* Product Input */}
+              <form
+                onSubmit={handleSubmit}
+                className='space-y-6 bg-white p-6 rounded-xl shadow-md'
+              >
                 <div>
                   <label className='block text-sm font-semibold text-gray-700 mb-2'>
                     Product / Service Looking for{' '}
                     <span className='text-red-500'>*</span>
                   </label>
                   <input
+                    name='product'
                     type='text'
+                    value={formData.product}
+                    onChange={handleChange}
                     placeholder='E.g. Clove, Granite, Flax Seeds...'
-                    className='w-full border-2 border-gray-200 p-3.5 rounded-xl focus:border-green-500 focus:outline-none transition-colors bg-gray-50 hover:bg-white'
+                    className='w-full border-2 border-gray-200 p-3.5 rounded-xl focus:border-green-500 bg-gray-50 hover:bg-white'
                     required
                   />
                 </div>
 
-                {/* Country Dropdown */}
                 <div>
                   <label className='block text-sm font-semibold text-gray-700 mb-2'>
                     Select Country <span className='text-red-500'>*</span>
                   </label>
                   <select
-                    className='w-full border-2 border-gray-200 p-3.5 rounded-xl focus:border-green-500 focus:outline-none transition-colors bg-gray-50 hover:bg-white'
+                    name='country'
+                    value={formData.country}
+                    onChange={handleChange}
+                    className='w-full border-2 border-gray-200 p-3.5 rounded-xl focus:border-green-500 bg-gray-50 hover:bg-white'
                     required
                   >
                     <option value=''>-- Select Country --</option>
-                    {countries.map((c, idx) => (
-                      <option key={idx} value={c}>
+                    {countries.map((c, i) => (
+                      <option key={i} value={c}>
                         {c}
                       </option>
                     ))}
                   </select>
                 </div>
 
-                {/* Name & Email */}
                 <div className='grid md:grid-cols-2 gap-6'>
                   <div>
                     <label className='block text-sm font-semibold text-gray-700 mb-2'>
                       Your Name <span className='text-red-500'>*</span>
                     </label>
                     <input
+                      name='name'
                       type='text'
+                      value={formData.name}
+                      onChange={handleChange}
                       placeholder='John Doe'
-                      className='w-full border-2 border-gray-200 p-3.5 rounded-xl focus:border-green-500 focus:outline-none transition-colors bg-gray-50 hover:bg-white'
+                      className='w-full border-2 border-gray-200 p-3.5 rounded-xl focus:border-green-500 bg-gray-50 hover:bg-white'
                       required
                     />
                   </div>
-
                   <div>
                     <label className='block text-sm font-semibold text-gray-700 mb-2'>
                       Email <span className='text-red-500'>*</span>
                     </label>
                     <input
+                      name='email'
                       type='email'
+                      value={formData.email}
+                      onChange={handleChange}
                       placeholder='john@example.com'
-                      className='w-full border-2 border-gray-200 p-3.5 rounded-xl focus:border-green-500 focus:outline-none transition-colors bg-gray-50 hover:bg-white'
+                      className='w-full border-2 border-gray-200 p-3.5 rounded-xl focus:border-green-500 bg-gray-50 hover:bg-white'
                       required
                     />
                   </div>
                 </div>
 
-                {/* Mobile */}
                 <div>
                   <label className='block text-sm font-semibold text-gray-700 mb-2'>
                     Mobile Number <span className='text-red-500'>*</span>
                   </label>
                   <input
+                    name='phone'
                     type='tel'
+                    value={formData.phone}
+                    onChange={handleChange}
                     placeholder='+91 98765 43210'
-                    className='w-full border-2 border-gray-200 p-3.5 rounded-xl focus:border-green-500 focus:outline-none transition-colors bg-gray-50 hover:bg-white'
+                    className='w-full border-2 border-gray-200 p-3.5 rounded-xl focus:border-green-500 bg-gray-50 hover:bg-white'
                     required
                   />
                 </div>
 
-                {/* Enquiry Details */}
                 <div>
                   <label className='block text-sm font-semibold text-gray-700 mb-2'>
                     Message <span className='text-red-500'>*</span>
                   </label>
                   <textarea
-                    placeholder='Please provide details about your requirements...'
+                    name='message'
                     rows={5}
-                    className='w-full border-2 border-gray-200 p-3.5 rounded-xl focus:border-green-500 focus:outline-none transition-colors bg-gray-50 hover:bg-white resize-none'
+                    value={formData.message}
+                    onChange={handleChange}
+                    placeholder='Please provide details about your requirements...'
+                    className='w-full border-2 border-gray-200 p-3.5 rounded-xl focus:border-green-500 bg-gray-50 hover:bg-white resize-none'
+                    required
                   />
                 </div>
 
-                {/* Submit */}
                 <button
                   type='submit'
-                  className='w-full bg-gradient-to-r from-green-700 to-green-600 text-white py-4 rounded-xl font-semibold hover:from-green-800 hover:to-green-700 transition-all shadow-lg hover:shadow-xl'
+                  disabled={status.loading}
+                  className='w-full bg-gradient-to-r from-green-700 to-green-600 text-white py-4 rounded-xl font-semibold hover:from-green-800 hover:to-green-700 transition-all shadow-lg'
                 >
-                  Send Enquiry
+                  {status.loading ? 'Sending...' : 'Send Enquiry'}
                 </button>
+
+                {status.success && (
+                  <p className='text-green-600 font-medium text-center'>
+                    {status.success}
+                  </p>
+                )}
+                {status.error && (
+                  <p className='text-red-600 font-medium text-center'>
+                    {status.error}
+                  </p>
+                )}
               </form>
             </div>
           </div>
