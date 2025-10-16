@@ -170,13 +170,15 @@ function ImageSlider() {
 }
 
 // Main Home Page Component
+// Corrected Quick Enquiry logic
+
 export default function Home() {
   const [formData, setFormData] = useState({
     product: '',
     country: '',
     name: '',
     email: '',
-    phone: '',
+    mobile: '',
     message: '',
   });
   const [status, setStatus] = useState({
@@ -185,31 +187,44 @@ export default function Home() {
     error: null,
   });
 
-  // handle input change
   const handleChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
-  // handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus({ loading: true, success: null, error: null });
 
+    // This must match formConfig.js (QuickEnquiry)
+    const fullFormData = {
+      name: formData.name,
+      email: formData.email,
+      mobile: formData.mobile,
+      message: formData.message,
+      product: formData.product,
+      country: formData.country,
+    };
+
     try {
-      const res = await fetch('/api/submit', {
+      const res = await fetch('http://localhost:3001/api/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          formType: 'Quick Enquiry',
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          message: formData.message,
-          productName: formData.product,
-          pageUrl: window.location.pathname,
+          formType: 'QuickEnquiry', // must match formConfig.js key
+          formData: fullFormData,
         }),
       });
 
-      const data = await res.json();
+      // If backend sends HTML (e.g. crash, 404), protect from JSON parse errors
+      const text = await res.text();
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (parseErr) {
+        throw new Error(
+          'Server returned invalid response. Check server.js route or port.'
+        );
+      }
+
       if (data.success) {
         setStatus({
           loading: false,
@@ -221,14 +236,21 @@ export default function Home() {
           country: '',
           name: '',
           email: '',
-          phone: '',
+          mobile: '',
           message: '',
         });
       } else {
         throw new Error(data.message || 'Submission failed');
       }
     } catch (err) {
-      setStatus({ loading: false, success: null, error: err.message });
+      console.error('Form submission error:', err);
+      setStatus({
+        loading: false,
+        success: null,
+        error:
+          err.message ||
+          'Something went wrong. Please check your connection or server.',
+      });
     }
   };
 
@@ -383,9 +405,9 @@ export default function Home() {
                     Mobile Number <span className='text-red-500'>*</span>
                   </label>
                   <input
-                    name='phone'
+                    name='mobile'
                     type='tel'
-                    value={formData.phone}
+                    value={formData.mobile}
                     onChange={handleChange}
                     placeholder='+91 98765 43210'
                     className='w-full border-2 border-gray-200 p-3.5 rounded-xl focus:border-green-500 bg-gray-50 hover:bg-white'

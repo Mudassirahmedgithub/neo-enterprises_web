@@ -1,6 +1,7 @@
 {
   "name": "neo-enterprises-web",
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -9,7 +10,11 @@
   "dependencies": {
     "@tailwindcss/forms": "^0.3.2",
     "axios": "^1.12.2",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
     "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "google-spreadsheet": "^5.0.2",
     "googleapis": "^161.0.0",
     "lucide-react": "^0.544.0",
     "react": "^17.0.0",

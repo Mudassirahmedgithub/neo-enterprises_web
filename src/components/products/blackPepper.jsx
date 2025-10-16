@@ -1,4 +1,44 @@
 import React, { useState } from 'react';
+// Place this ABOVE your component
+import { countryCodes } from '@/utils/countryCodes';
+
+export async function submitForm(formType, formData, setStatus, resetForm) {
+  setStatus({ loading: true, success: null, error: null });
+
+  try {
+    const res = await fetch('http://localhost:3001/api/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ formType, formData }),
+    });
+
+    const text = await res.text();
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      throw new Error('Server returned invalid JSON. Check backend route.');
+    }
+
+    if (data.success) {
+      setStatus({
+        loading: false,
+        success: 'Form submitted successfully!',
+        error: null,
+      });
+      resetForm();
+    } else {
+      throw new Error(data.message || 'Submission failed');
+    }
+  } catch (err) {
+    console.error('Form submission error:', err);
+    setStatus({
+      loading: false,
+      success: null,
+      error: err.message || 'Something went wrong while submitting.',
+    });
+  }
+}
 
 export default function BlackPepper() {
   const phone = '+91 88866 68873';
@@ -7,7 +47,7 @@ export default function BlackPepper() {
   const [form, setForm] = useState({
     name: '',
     email: '',
-    countryCode: '+91',
+    countryCode: '91',
     mobile: '',
     quantity: '',
     container: '',
@@ -15,27 +55,35 @@ export default function BlackPepper() {
     requirement: '',
   });
 
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setForm((s) => ({ ...s, [name]: value }));
-  }
+  const [status, setStatus] = useState({
+    loading: false,
+    success: null,
+    error: null,
+  });
 
-  function handleSubmit(e) {
+  const handleChange = (e) =>
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Black Pepper enquiry:', form);
-    alert('Thank you! Your enquiry has been submitted.');
-    setForm({
-      name: '',
-      email: '',
-      countryCode: '+91',
-      mobile: '',
-      quantity: '',
-      container: '',
-      purpose: 'Reselling',
-      requirement: '',
-    });
-  }
-
+    const formData = {
+      ...form,
+      mobile: `${form.countryCode} ${form.mobile}`,
+    };
+    submitForm('BlackPepperEnquiry', formData, setStatus, () =>
+      setForm({
+        name: '',
+        email: '',
+        countryCode: '91',
+        mobile: '',
+        quantity: '',
+        container: '',
+        purpose: 'Reselling',
+        requirement: '',
+      })
+    );
+  };
+  
   const moreProducts = [
     {
       title: 'Flax Seeds',
@@ -46,11 +94,6 @@ export default function BlackPepper() {
       title: 'Soyabean Flakes',
       href: '/products/Soyabeen',
       img: '/images/products/SoyabeanFlakes.png',
-    },
-    {
-      title: 'Soyabean Meal',
-      href: '/products/soyabeanMeal',
-      img: '/images/products/SoyabeanMeal.png',
     },
     {
       title: 'Clove',
@@ -66,6 +109,11 @@ export default function BlackPepper() {
       title: 'Makhana',
       href: '/products/lotusSeeds',
       img: '/images/products/lotusSeeds.png',
+    },
+    {
+      title: 'Soyabean Meal',
+      href: '/products/soyabeanMeal',
+      img: '/images/products/SoyabeanMeal.png',
     },
     {
       title: 'Natural Granite',
@@ -89,13 +137,12 @@ export default function BlackPepper() {
 
           {/* Right: Details */}
           <div className='md:w-1/2 w-full p-8'>
-            <h1 className='text-2xl font-semibold text-green-900'>
-              Black Pepper (Kali Mirch)
-            </h1>
+            <h1 className='text-2xl font-semibold text-green-900'>Black Pepper</h1>
             <p className='text-sm text-gray-600 mt-2'>
-              Premium Grade Whole & Ground Black Pepper
+              Premium Grade Dried Black Pepper (Piper nigrum)
             </p>
 
+            {/* Product Info */}
             <div className='mt-6 grid grid-cols-2 gap-4 text-sm'>
               <div>
                 <p className='text-gray-500'>Quantity</p>
@@ -111,13 +158,11 @@ export default function BlackPepper() {
               </div>
               <div>
                 <p className='text-gray-500'>Color</p>
-                <p className='font-medium'>Dark Brown to Black</p>
+                <p className='font-medium'>Black / Dark Brown</p>
               </div>
               <div>
                 <p className='text-gray-500'>Packaging Type</p>
-                <p className='font-medium'>
-                  Jute Bags / PP Bags / Vacuum Packs
-                </p>
+                <p className='font-medium'>PP Bags / Jute Bags</p>
               </div>
               <div>
                 <p className='text-gray-500'>Country of Origin</p>
@@ -125,6 +170,7 @@ export default function BlackPepper() {
               </div>
             </div>
 
+            {/* Call/Enquiry */}
             <div className='mt-6 flex gap-3'>
               <a
                 href={`tel:${phone}`}
@@ -142,48 +188,48 @@ export default function BlackPepper() {
           </div>
         </div>
 
-        {/* Product Details */}
+        {/* Product Details Section */}
         <div className='p-8 border-t bg-gray-50'>
           <div className='max-w-6xl mx-auto'>
             <h2 className='text-2xl font-semibold text-green-800 mb-6'>
               Product Details
             </h2>
 
-            {/* Specifications */}
+            {/* Specifications Box */}
             <div className='bg-white p-8 border-2 border-gray-200 rounded-xl shadow-md mb-6'>
               <h3 className='text-lg font-semibold text-green-700 mb-4 pb-2 border-b border-gray-200'>
                 Specifications
               </h3>
               <div className='grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-1 text-sm'>
                 <div className='flex justify-between py-3 border-b border-gray-100'>
-                  <span className='font-medium text-gray-600'>Variety:</span>
+                  <span className='font-medium text-gray-600'>
+                    Botanical Name:
+                  </span>
                   <span className='text-gray-800 text-right'>
-                    Malabar / Tellicherry
+                    Piper nigrum
                   </span>
                 </div>
                 <div className='flex justify-between py-3 border-b border-gray-100'>
-                  <span className='font-medium text-gray-600'>Moisture:</span>
-                  <span className='text-gray-800 text-right'>12% max</span>
+                  <span className='font-medium text-gray-600'>Form:</span>
+                  <span className='text-gray-800 text-right'>
+                    Whole / Cracked / Ground
+                  </span>
                 </div>
                 <div className='flex justify-between py-3 border-b border-gray-100'>
-                  <span className='font-medium text-gray-600'>Admixture:</span>
-                  <span className='text-gray-800 text-right'>0.5% max</span>
+                  <span className='font-medium text-gray-600'>
+                    Moisture Content:
+                  </span>
+                  <span className='text-gray-800 text-right'>12% Max</span>
+                </div>
+                <div className='flex justify-between py-3 border-b border-gray-100'>
+                  <span className='font-medium text-gray-600'>Size:</span>
+                  <span className='text-gray-800 text-right'>4 – 5 mm</span>
                 </div>
                 <div className='flex justify-between py-3 border-b border-gray-100'>
                   <span className='font-medium text-gray-600'>
                     Piperine Content:
                   </span>
-                  <span className='text-gray-800 text-right'>5–9%</span>
-                </div>
-                <div className='flex justify-between py-3 border-b border-gray-100'>
-                  <span className='font-medium text-gray-600'>Form:</span>
-                  <span className='text-gray-800 text-right'>
-                    Whole / Crushed / Powder
-                  </span>
-                </div>
-                <div className='flex justify-between py-3 border-b border-gray-100'>
-                  <span className='font-medium text-gray-600'>Density:</span>
-                  <span className='text-gray-800 text-right'>550–600 g/l</span>
+                  <span className='text-gray-800 text-right'>Minimum 4%</span>
                 </div>
                 <div className='flex justify-between py-3 border-b border-gray-100 md:border-b-0'>
                   <span className='font-medium text-gray-600'>
@@ -194,7 +240,7 @@ export default function BlackPepper() {
               </div>
             </div>
 
-            {/* Applications */}
+            {/* Applications Box */}
             <div className='bg-white p-8 border-2 border-gray-200 rounded-xl shadow-md mb-6'>
               <h3 className='text-lg font-semibold text-green-700 mb-4 pb-2 border-b border-gray-200'>
                 Product Applications
@@ -204,10 +250,9 @@ export default function BlackPepper() {
                   <span className='text-green-600 font-bold mt-1'>•</span>
                   <div>
                     <span className='font-semibold text-gray-800'>
-                      Culinary Use:
+                      Culinary Uses:
                     </span>{' '}
-                    Used as a universal spice for seasoning soups, sauces,
-                    marinades, meat, and vegetable dishes.
+                    Essential spice in cuisines worldwide, used in curries, sauces, marinades, and seasoning blends for its sharp, pungent flavor.
                   </div>
                 </li>
                 <li className='flex gap-3'>
@@ -216,38 +261,34 @@ export default function BlackPepper() {
                     <span className='font-semibold text-gray-800'>
                       Food Processing:
                     </span>{' '}
-                    Integral in spice blends, pickles, sauces, and snacks for
-                    flavor enhancement and aroma.
+                    Used in ready-to-eat meals, snacks, meat processing, and instant food products for flavor enhancement.
                   </div>
                 </li>
                 <li className='flex gap-3'>
                   <span className='text-green-600 font-bold mt-1'>•</span>
                   <div>
                     <span className='font-semibold text-gray-800'>
-                      Pharmaceutical Use:
+                      Essential Oil Extraction:
                     </span>{' '}
-                    Contains piperine, which aids digestion, improves
-                    metabolism, and enhances bioavailability of nutrients.
+                    Extracted for pepper oil, used in perfumery, aromatherapy, and flavoring agents in food industries.
                   </div>
                 </li>
                 <li className='flex gap-3'>
                   <span className='text-green-600 font-bold mt-1'>•</span>
                   <div>
                     <span className='font-semibold text-gray-800'>
-                      Cosmetic Industry:
+                      Medicinal & Pharmaceutical Uses:
                     </span>{' '}
-                    Used in essential oils, scrubs, and aromatherapy for its
-                    warming and detoxifying effects.
+                    Known for digestive, antioxidant, and anti-inflammatory properties, used in traditional medicines and supplements.
                   </div>
                 </li>
                 <li className='flex gap-3'>
                   <span className='text-green-600 font-bold mt-1'>•</span>
                   <div>
                     <span className='font-semibold text-gray-800'>
-                      Animal Feed Supplements:
+                      Nutraceutical Industry:
                     </span>{' '}
-                    Incorporated in certain livestock feed formulations for
-                    digestive stimulation and microbial control.
+                    Used in health supplements for bioavailability enhancement and metabolic benefits.
                   </div>
                 </li>
               </ul>
@@ -261,9 +302,8 @@ export default function BlackPepper() {
                     Packing
                   </h3>
                   <p className='text-sm text-gray-700'>
-                    Packed in 25 kg / 50 kg jute or PP bags, or as per buyer
-                    specification. Vacuum and HDPE packaging available for
-                    export.
+                    Available in 25 kg / 50 kg PP or jute bags, or as per
+                    buyer's customized requirements.
                   </p>
                 </div>
                 <div>
@@ -271,8 +311,8 @@ export default function BlackPepper() {
                     Storage
                   </h3>
                   <p className='text-sm text-gray-700'>
-                    Store in a cool, dry, well-ventilated place away from direct
-                    sunlight and moisture.
+                    Store in cool, dry, and well-ventilated areas, away from
+                    moisture and direct sunlight.
                   </p>
                 </div>
                 <div>
@@ -280,24 +320,11 @@ export default function BlackPepper() {
                     Shelf Life
                   </h3>
                   <p className='text-sm text-gray-700'>
-                    18–24 months under recommended storage conditions.
+                    24 months from the date of packaging when stored under
+                    recommended conditions.
                   </p>
                 </div>
               </div>
-            </div>
-
-            <div className='text-center'>
-              <button
-                onClick={() =>
-                  window.scrollTo({
-                    top: document.body.scrollHeight,
-                    behavior: 'smooth',
-                  })
-                }
-                className='py-4 px-10 rounded-lg bg-green-700 text-white font-semibold hover:bg-green-800 transition shadow-lg text-lg'
-              >
-                Yes! I am interested
-              </button>
             </div>
           </div>
         </div>
@@ -308,6 +335,7 @@ export default function BlackPepper() {
             <h3 className='text-xl font-semibold text-green-900'>
               Looking for "Black Pepper" ?
             </h3>
+
             <form
               onSubmit={handleSubmit}
               className='mt-4 grid grid-cols-1 md:grid-cols-2 gap-4'
@@ -322,6 +350,7 @@ export default function BlackPepper() {
                   className='mt-1 w-full rounded border px-3 py-2'
                 />
               </div>
+
               <div>
                 <label className='block text-sm text-gray-700'>Email</label>
                 <input
@@ -334,40 +363,41 @@ export default function BlackPepper() {
                 />
               </div>
 
-              <div className='flex gap-2'>
-                <div className='w-28'>
-                  <label className='block text-sm text-gray-700'>
-                    Mobile No.
-                  </label>
+              {/* Country Code + Mobile */}
+              <div className='flex gap-2 md:col-span-2'>
+                <div className='w-32'>
+                  <label className='block text-sm text-gray-700'>Country Code</label>
                   <select
                     name='countryCode'
                     value={form.countryCode}
                     onChange={handleChange}
                     className='mt-1 w-full rounded border px-3 py-2'
+                    required
                   >
-                    <option>+91</option>
-                    <option>+1</option>
-                    <option>+44</option>
+                    {countryCodes.map((c) => (
+                      <option key={c.code} value={c.code}>
+                        {c.code} ({c.name})
+                      </option>
+                    ))}
                   </select>
                 </div>
+
                 <div className='flex-1'>
-                  <label className='block text-sm text-gray-700 hidden md:block'>
-                    Enter Mobile No.
-                  </label>
+                  <label className='block text-sm text-gray-700'>Mobile No.</label>
                   <input
                     name='mobile'
                     value={form.mobile}
                     onChange={handleChange}
                     required
                     className='mt-1 w-full rounded border px-3 py-2'
+                    type='tel'
+                    placeholder='Enter mobile number'
                   />
                 </div>
               </div>
 
               <div>
-                <label className='block text-sm text-gray-700'>
-                  Estimated Quantity
-                </label>
+                <label className='block text-sm text-gray-700'>Estimated Quantity</label>
                 <input
                   name='quantity'
                   value={form.quantity}
@@ -388,9 +418,7 @@ export default function BlackPepper() {
               </div>
 
               <div>
-                <label className='block text-sm text-gray-700'>
-                  Purpose of Requirement
-                </label>
+                <label className='block text-sm text-gray-700'>Purpose of Requirement</label>
                 <select
                   name='purpose'
                   value={form.purpose}
@@ -403,72 +431,63 @@ export default function BlackPepper() {
               </div>
 
               <div className='md:col-span-2'>
-                <label className='block text-sm text-gray-700'>
-                  Requirement Details
-                </label>
+                <label className='block text-sm text-gray-700'>Requirement Details</label>
                 <textarea
                   name='requirement'
                   value={form.requirement}
                   onChange={handleChange}
                   rows={4}
                   className='mt-1 w-full rounded border px-3 py-2'
-                >
-                  I am interested. Kindly send the quotation for the same.
-                </textarea>
+                  placeholder='I am interested. Kindly send the quotation for the same.'
+                />
               </div>
 
               <div className='md:col-span-2 text-right'>
                 <button
                   type='submit'
-                  className='py-2 px-6 rounded bg-green-700 text-white font-semibold'
+                  disabled={status.loading}
+                  className={`py-2 px-6 rounded font-semibold ${
+                    status.loading
+                      ? 'bg-green-400 cursor-not-allowed'
+                      : 'bg-green-700 text-white'
+                  }`}
                 >
-                  Send Enquiry
+                  {status.loading ? 'Submitting...' : 'Send Enquiry'}
                 </button>
+
+                {status.loading && (
+                  <p className='mt-3 text-sm text-blue-600'>Submitting...</p>
+                )}
+                {status.success && (
+                  <p className='mt-3 text-sm text-green-600 font-medium'>
+                    {status.success}
+                  </p>
+                )}
+                {status.error && (
+                  <p className='mt-3 text-sm text-red-600 font-medium'>
+                    {status.error}
+                  </p>
+                )}
               </div>
             </form>
           </div>
         </div>
 
-        {/* Explore More */}
+        {/* Explore More Products */}
         <div className='p-8 border-t'>
-          <h3 className='text-xl font-semibold text-green-900 mb-4'>
-            Explore More Products
-          </h3>
+          <h3 className='text-xl font-semibold text-green-900 mb-4'>Explore More Products</h3>
           <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4'>
             {moreProducts.map((p) => (
-              <a
-                key={p.title}
-                href={p.href}
-                className='group bg-white border rounded-lg overflow-hidden shadow-sm hover:shadow-md'
-              >
+              <a key={p.title} href={p.href} className='group bg-white border rounded-lg overflow-hidden shadow-sm hover:shadow-md'>
                 <div className='h-32 w-full overflow-hidden'>
-                  <img
-                    src={p.img}
-                    alt={p.title}
-                    className='w-full h-full object-cover transform group-hover:scale-105 transition'
-                  />
+                  <img src={p.img} alt={p.title} className='w-full h-full object-cover transform group-hover:scale-105 transition' />
                 </div>
                 <div className='p-3'>
-                  <h4 className='text-sm font-medium text-gray-800'>
-                    {p.title}
-                  </h4>
+                  <h4 className='text-sm font-medium text-gray-800'>{p.title}</h4>
                   <div className='mt-2 flex justify-between items-center'>
-                    <span className='text-xs text-green-700 font-semibold'>
-                      Get Best Quote
-                    </span>
-                    <svg
-                      xmlns='http://www.w3.org/2000/svg'
-                      className='h-4 w-4 text-green-700'
-                      fill='none'
-                      viewBox='0 0 24 24'
-                      stroke='currentColor'
-                    >
-                      <path
-                        strokeLinecap='round'
-                        strokeLinejoin='round'
-                        strokeWidth={2}
-                        d='M9 5l7 7-7 7'
-                      />
+                    <span className='text-xs text-green-700 font-semibold'>Get Best Quote</span>
+                    <svg xmlns='http://www.w3.org/2000/svg' className='h-4 w-4 text-green-700' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+                      <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 5l7 7-7 7' />
                     </svg>
                   </div>
                 </div>

@@ -1,4 +1,45 @@
 import React, { useState } from 'react';
+// Place this ABOVE your component
+import { countryCodes } from '@/utils/countryCodes';
+
+export async function submitForm(formType, formData, setStatus, resetForm) {
+  setStatus({ loading: true, success: null, error: null });
+
+  try {
+    const res = await fetch('http://localhost:3001/api/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ formType, formData }),
+    });
+
+    const text = await res.text();
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      throw new Error('Server returned invalid JSON. Check backend route.');
+    }
+
+    if (data.success) {
+      setStatus({
+        loading: false,
+        success: 'Form submitted successfully!',
+        error: null,
+      });
+      resetForm();
+    } else {
+      throw new Error(data.message || 'Submission failed');
+    }
+  } catch (err) {
+    console.error('Form submission error:', err);
+    setStatus({
+      loading: false,
+      success: null,
+      error: err.message || 'Something went wrong while submitting.',
+    });
+  }
+}
+// Now your component starts below
 
 export default function SoyabeanFlakes() {
   const phone = '+91 88866 68873';
@@ -7,7 +48,7 @@ export default function SoyabeanFlakes() {
   const [form, setForm] = useState({
     name: '',
     email: '',
-    countryCode: '+91',
+    countryCode: '91',
     mobile: '',
     quantity: '',
     container: '',
@@ -15,26 +56,34 @@ export default function SoyabeanFlakes() {
     requirement: '',
   });
 
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setForm((s) => ({ ...s, [name]: value }));
-  }
+  const [status, setStatus] = useState({
+    loading: false,
+    success: null,
+    error: null,
+  });
 
-  function handleSubmit(e) {
+  const handleChange = (e) =>
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Soyabean Flakes enquiry:', form);
-    alert('Thank you! Your enquiry has been submitted.');
-    setForm({
-      name: '',
-      email: '',
-      countryCode: '+91',
-      mobile: '',
-      quantity: '',
-      container: '',
-      purpose: 'Reselling',
-      requirement: '',
-    });
-  }
+    const formData = {
+      ...form,
+      mobile: `${form.countryCode} ${form.mobile}`,
+    };
+    submitForm('SoyabeenEnquiry', formData, setStatus, () =>
+      setForm({
+        name: '',
+        email: '',
+        countryCode: '91',
+        mobile: '',
+        quantity: '',
+        container: '',
+        purpose: 'Reselling',
+        requirement: '',
+      })
+    );
+  };
 
   const moreProducts = [
     {
@@ -286,20 +335,7 @@ export default function SoyabeanFlakes() {
               </div>
             </div>
 
-            {/* CTA */}
-            <div className='text-center'>
-              <button
-                onClick={() =>
-                  window.scrollTo({
-                    top: document.body.scrollHeight,
-                    behavior: 'smooth',
-                  })
-                }
-                className='py-4 px-10 rounded-lg bg-green-700 text-white font-semibold hover:bg-green-800 transition shadow-lg text-lg'
-              >
-                Yes! I am interested
-              </button>
-            </div>
+
           </div>
         </div>
 
@@ -307,8 +343,9 @@ export default function SoyabeanFlakes() {
         <div className='p-8 border-t'>
           <div className='max-w-4xl mx-auto'>
             <h3 className='text-xl font-semibold text-green-900'>
-              Looking for "Soyabean Flakes" ?
+              Looking for "Soyabeen" ?
             </h3>
+
             <form
               onSubmit={handleSubmit}
               className='mt-4 grid grid-cols-1 md:grid-cols-2 gap-4'
@@ -323,6 +360,7 @@ export default function SoyabeanFlakes() {
                   className='mt-1 w-full rounded border px-3 py-2'
                 />
               </div>
+
               <div>
                 <label className='block text-sm text-gray-700'>Email</label>
                 <input
@@ -335,40 +373,41 @@ export default function SoyabeanFlakes() {
                 />
               </div>
 
-              <div className='flex gap-2'>
-                <div className='w-28'>
-                  <label className='block text-sm text-gray-700'>
-                    Mobile No.
-                  </label>
+              {/* Country Code + Mobile */}
+              <div className='flex gap-2 md:col-span-2'>
+                <div className='w-32'>
+                  <label className='block text-sm text-gray-700'>Country Code</label>
                   <select
                     name='countryCode'
                     value={form.countryCode}
                     onChange={handleChange}
                     className='mt-1 w-full rounded border px-3 py-2'
+                    required
                   >
-                    <option>+91</option>
-                    <option>+1</option>
-                    <option>+44</option>
+                    {countryCodes.map((c) => (
+                      <option key={c.code} value={c.code}>
+                        {c.code} ({c.name})
+                      </option>
+                    ))}
                   </select>
                 </div>
+
                 <div className='flex-1'>
-                  <label className='block text-sm text-gray-700 hidden md:block'>
-                    Enter Mobile No.
-                  </label>
+                  <label className='block text-sm text-gray-700'>Mobile No.</label>
                   <input
                     name='mobile'
                     value={form.mobile}
                     onChange={handleChange}
                     required
                     className='mt-1 w-full rounded border px-3 py-2'
+                    type='tel'
+                    placeholder='Enter mobile number'
                   />
                 </div>
               </div>
 
               <div>
-                <label className='block text-sm text-gray-700'>
-                  Estimated Quantity
-                </label>
+                <label className='block text-sm text-gray-700'>Estimated Quantity</label>
                 <input
                   name='quantity'
                   value={form.quantity}
@@ -389,9 +428,7 @@ export default function SoyabeanFlakes() {
               </div>
 
               <div>
-                <label className='block text-sm text-gray-700'>
-                  Purpose of Requirement
-                </label>
+                <label className='block text-sm text-gray-700'>Purpose of Requirement</label>
                 <select
                   name='purpose'
                   value={form.purpose}
@@ -404,72 +441,62 @@ export default function SoyabeanFlakes() {
               </div>
 
               <div className='md:col-span-2'>
-                <label className='block text-sm text-gray-700'>
-                  Requirement Details
-                </label>
+                <label className='block text-sm text-gray-700'>Requirement Details</label>
                 <textarea
                   name='requirement'
                   value={form.requirement}
                   onChange={handleChange}
                   rows={4}
                   className='mt-1 w-full rounded border px-3 py-2'
-                >
-                  I am interested. Kindly send the quotation for the same.
-                </textarea>
+                  placeholder='I am interested. Kindly send the quotation for the same.'
+                />
               </div>
 
               <div className='md:col-span-2 text-right'>
                 <button
                   type='submit'
-                  className='py-2 px-6 rounded bg-green-700 text-white font-semibold'
+                  disabled={status.loading}
+                  className={`py-2 px-6 rounded font-semibold ${
+                    status.loading
+                      ? 'bg-green-400 cursor-not-allowed'
+                      : 'bg-green-700 text-white'
+                  }`}
                 >
-                  Send Enquiry
+                  {status.loading ? 'Submitting...' : 'Send Enquiry'}
                 </button>
+
+                {status.loading && (
+                  <p className='mt-3 text-sm text-blue-600'>Submitting...</p>
+                )}
+                {status.success && (
+                  <p className='mt-3 text-sm text-green-600 font-medium'>
+                    {status.success}
+                  </p>
+                )}
+                {status.error && (
+                  <p className='mt-3 text-sm text-red-600 font-medium'>
+                    {status.error}
+                  </p>
+                )}
               </div>
             </form>
           </div>
         </div>
-
         {/* Explore More Products */}
         <div className='p-8 border-t'>
-          <h3 className='text-xl font-semibold text-green-900 mb-4'>
-            Explore More Products
-          </h3>
+          <h3 className='text-xl font-semibold text-green-900 mb-4'>Explore More Products</h3>
           <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4'>
             {moreProducts.map((p) => (
-              <a
-                key={p.title}
-                href={p.href}
-                className='group bg-white border rounded-lg overflow-hidden shadow-sm hover:shadow-md'
-              >
+              <a key={p.title} href={p.href} className='group bg-white border rounded-lg overflow-hidden shadow-sm hover:shadow-md'>
                 <div className='h-32 w-full overflow-hidden'>
-                  <img
-                    src={p.img}
-                    alt={p.title}
-                    className='w-full h-full object-cover transform group-hover:scale-105 transition'
-                  />
+                  <img src={p.img} alt={p.title} className='w-full h-full object-cover transform group-hover:scale-105 transition' />
                 </div>
                 <div className='p-3'>
-                  <h4 className='text-sm font-medium text-gray-800'>
-                    {p.title}
-                  </h4>
+                  <h4 className='text-sm font-medium text-gray-800'>{p.title}</h4>
                   <div className='mt-2 flex justify-between items-center'>
-                    <span className='text-xs text-green-700 font-semibold'>
-                      Get Best Quote
-                    </span>
-                    <svg
-                      xmlns='http://www.w3.org/2000/svg'
-                      className='h-4 w-4 text-green-700'
-                      fill='none'
-                      viewBox='0 0 24 24'
-                      stroke='currentColor'
-                    >
-                      <path
-                        strokeLinecap='round'
-                        strokeLinejoin='round'
-                        strokeWidth={2}
-                        d='M9 5l7 7-7 7'
-                      />
+                    <span className='text-xs text-green-700 font-semibold'>Get Best Quote</span>
+                    <svg xmlns='http://www.w3.org/2000/svg' className='h-4 w-4 text-green-700' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+                      <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 5l7 7-7 7' />
                     </svg>
                   </div>
                 </div>
@@ -481,3 +508,4 @@ export default function SoyabeanFlakes() {
     </div>
   );
 }
+
