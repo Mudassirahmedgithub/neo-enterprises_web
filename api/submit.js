@@ -1,4 +1,3 @@
-import fs from 'fs';
 import { google } from 'googleapis';
 import { Resend } from 'resend';
 import { formConfigs } from './formConfig.js';
@@ -6,16 +5,17 @@ import { formConfigs } from './formConfig.js';
 // ---------- SETUP RESEND ----------
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// ---------- SETUP GOOGLE SHEETS AUTH (via local creds file) ----------
+// ---------- SETUP GOOGLE SHEETS AUTH ----------
 let creds;
 try {
-  const raw = fs.readFileSync('./google-creds.json', 'utf8');
+  const raw = process.env.GOOGLE_CREDS;
   creds = JSON.parse(raw);
   console.log('✅ Google credentials loaded successfully');
 } catch (err) {
-  console.error('❌ Failed to load google-creds.json:', err.message);
+  console.error('❌ Failed to parse GOOGLE_CREDS:', err.message);
   creds = null;
 }
+
 
 const auth = creds
   ? new google.auth.GoogleAuth({

@@ -6,11 +6,12 @@ export async function submitForm(formType, formData, setStatus, resetForm) {
   setStatus({ loading: true, success: null, error: null });
 
   try {
-    const res = await fetch('http://localhost:3001/api/submit', {
+    const res = await fetch('/api/submit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ formType, formData }),
     });
+
 
     const text = await res.text();
     let data;
@@ -459,9 +460,6 @@ export default function Clove() {
             </form>
           </div>
         </div>
-
-
-
 
         {/* Explore More Products */}
         <div className='p-8 border-t'>
