@@ -28,13 +28,12 @@ const sheets = auth ? google.sheets({ version: 'v4', auth }) : null;
 
 // ---------- MAIN HANDLER ----------
 export default async function handler(req, res) {
-  console.log('=== 🟢 API ENTRY ===');
-  console.log('Incoming method:', req.method);
-  console.log('Environment check:', {
-    hasResendKey: !!process.env.RESEND_API_KEY,
-    hasGoogleJSON: fs.existsSync('./google-creds.json'),
-    hasSheetID: !!process.env.GOOGLE_SHEET_ID,
-  });
+console.log('Environment check:', {
+  hasResendKey: !!process.env.RESEND_API_KEY,
+  hasGoogleJSON: !!process.env.GOOGLE_CREDS,
+  hasSheetID: !!process.env.GOOGLE_SHEET_ID,
+});
+
 
   if (req.method !== 'POST') {
     return res.status(405).json({ success: false, message: 'Method not allowed' });
