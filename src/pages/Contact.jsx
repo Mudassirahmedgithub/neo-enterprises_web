@@ -43,7 +43,7 @@ const handleSubmit = async (e) => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        formType: 'QuickEnquiry',
+        formType: 'contact',
         formData: fullFormData,
       }),
     });
