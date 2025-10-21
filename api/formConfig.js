@@ -19,7 +19,7 @@ export const formConfigs = {
   },
 
   QuickEnquiry: {
-    sheetName: 'Sheet1',
+    sheetName: 'Contact & Home',
     mailTo: 'neoenterprises1979@gmail.com',
     subject: 'New Quick Enquiry',
     requiredFields: ['name', 'email', 'mobile', 'message', 'product','country'],
@@ -68,7 +68,7 @@ export const formConfigs = {
   },
 
   contact: {
-    sheetName: 'Sheet1',
+    sheetName: 'Contact & Home',
     mailTo: 'neoenterprises1979@gmail.com',
     subject: 'New Contact Page Enquiry',
     requiredFields: ['name', 'email', 'mobile', 'product', 'granite', 'details'],
