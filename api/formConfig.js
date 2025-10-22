@@ -20,13 +20,13 @@ export const formConfigs = {
 
   QuickEnquiry: {
     sheetName: 'Contact & Home',
-    mailTo: 'neoenterprises1979@gmail.com',
+    mailTo: 'muddusam1234@gmail.com',
     subject: 'New Quick Enquiry',
     requiredFields: ['name', 'email', 'mobile', 'message', 'product','country'],
   },
   FlaxEnquiry: {
     sheetName: 'Agro Products',
-    mailTo: 'neoenterprises1979@gmail.com',
+    mailTo: 'mudassirahmed915171@gmail.com',
     subject: 'New FLax Seeds Enquiry',
     requiredFields: ['name', 'email', 'mobile', 'quantity', 'purpose','countryCode','requirement'],
   },
