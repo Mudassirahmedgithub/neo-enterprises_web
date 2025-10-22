@@ -17,6 +17,14 @@ import BlackPepper from './components/products/blackPepper';
 import SoyabeanFlakes from './components/products/Soyabeen';
 import SoyabeanMeal from './components/products/soyabeanMeal';
 import Makhana from './components/products/lotusSeeds';
+import GraniteNeoChocolate from './components/products/granite/NeoChocolate';
+import GraniteNeoGalaxy from './components/products/granite/NeoGalaxy';
+import GraniteNeokTize from './components/products/granite/NeokTize';
+import GraniteNeoTanBlue from './components/products/granite/NeoTanBlue';
+import GraniteNeoTanRed from './components/products/granite/NeoTanRed';
+import GraniteNeoTigerShade from './components/products/granite/NeoTigerShade';
+import GraniteNeoTomato from './components/products/granite/NeoTomato';
+import StarBlue from './components/products/granite/StarBlue';
 
 // Import Header/Footer
 import Header from './components/Header';
@@ -42,6 +50,14 @@ export default function App() {
           <Route exact path='/products/Soyabeen' component={SoyabeanFlakes} />
           <Route exact path='/products/lotusSeeds' component={Makhana} />
           <Route exact path='/products/flax' component={Flax} />
+          <Route exact path='/products/granite/NeoChocolate' component={GraniteNeoChocolate} />
+          <Route exact path='/products/granite/NeoGalaxy' component={GraniteNeoGalaxy} />
+          <Route exact path='/products/granite/NeokTize' component={GraniteNeokTize} />
+          <Route exact path='/products/granite/NeoTanBlue' component={GraniteNeoTanBlue} />
+          <Route exact path='/products/granite/NeoTanRed' component={GraniteNeoTanRed} />
+          <Route exact path='/products/granite/NeoTigerShade' component={GraniteNeoTigerShade} />
+          <Route exact path='/products/granite/NeoTomato' component={GraniteNeoTomato} />
+          <Route exact path='/products/granite/StarBlue' component={StarBlue} />
           <Route path='/products' component={Products} />
           <Route path='/about' component={About} />
           <Route path='/contact' component={Contact} />
