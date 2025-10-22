@@ -25,6 +25,11 @@ import GraniteNeoTanRed from './components/products/granite/NeoTanRed';
 import GraniteNeoTigerShade from './components/products/granite/NeoTigerShade';
 import GraniteNeoTomato from './components/products/granite/NeoTomato';
 import StarBlue from './components/products/granite/StarBlue';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
+import Sitemap from './pages/Sitemap';
+
+
 
 // Import Header/Footer
 import Header from './components/Header';
@@ -41,6 +46,9 @@ export default function App() {
         {/* Routes */}
         <Switch>
           <Route exact path='/' component={Home} />
+          <Route exact path='/sitemap' component={Sitemap} />
+          <Route exact path='/PrivacyPolicy' component={PrivacyPolicy} />
+          <Route exact path='/TermsOfService' component={TermsOfService} />
           <Route path='/testimonials' component={Testimonials} />
           <Route exact path='/products/granite' component={Granites} />
           <Route exact path='/products/clove' component={Clove} />

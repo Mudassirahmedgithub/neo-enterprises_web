@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://theneoenterprises.com/</loc>
+  </url>
+
+  <url>
+    <loc>https://theneoenterprises.com/about</loc>
+  </url>
+
+  <url>
+    <loc>https://theneoenterprises.com/products</loc>
+  </url>
+
+  <url>
+    <loc>https://theneoenterprises.com/testimonials</loc>
+  </url>
+
+  <url>
+    <loc>https://theneoenterprises.com/contact</loc>
+  </url>
+
+  <url>
+    <loc>https://theneoenterprises.com/PrivacyPolicy</loc>
+  </url>
+
+  <url>
+    <loc>https://theneoenterprises.com/TermsOfService</loc>
+  </url>
+
+  <!-- Product Categories -->
+  <url><loc>https://theneoenterprises.com/products/granite</loc></url>
+  <url><loc>https://theneoenterprises.com/products/clove</loc></url>
+  <url><loc>https://theneoenterprises.com/products/cardomon</loc></url>
+  <url><loc>https://theneoenterprises.com/products/blackPepper</loc></url>
+  <url><loc>https://theneoenterprises.com/products/Soyabeen</loc></url>
+  <url><loc>https://theneoenterprises.com/products/soyabeanMeal</loc></url>
+  <url><loc>https://theneoenterprises.com/products/flax</loc></url>
+  <url><loc>https://theneoenterprises.com/products/lotusSeeds</loc></url>
+
+  <!-- Granite Items -->
+  <url><loc>https://theneoenterprises.com/products/granite/NeoChocolate</loc></url>
+  <url><loc>https://theneoenterprises.com/products/granite/NeoGalaxy</loc></url>
+  <url><loc>https://theneoenterprises.com/products/granite/NeokTize</loc></url>
+  <url><loc>https://theneoenterprises.com/products/granite/NeoTanBlue</loc></url>
+  <url><loc>https://theneoenterprises.com/products/granite/NeoTanRed</loc></url>
+  <url><loc>https://theneoenterprises.com/products/granite/NeoTigerShade</loc></url>
+  <url><loc>https://theneoenterprises.com/products/granite/NeoTomato</loc></url>
+  <url><loc>https://theneoenterprises.com/products/granite/StarBlue</loc></url>
+
+  <url><loc>https://theneoenterprises.com/sitemap</loc></url>
+
+</urlset>

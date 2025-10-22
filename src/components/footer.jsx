@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import {
   Phone,
   Mail,
@@ -462,7 +464,7 @@ function Footer() {
             }}
           >
             <a
-              href='#'
+              href="/PrivacyPolicy"
               style={{
                 color: '#d1fae5',
                 textDecoration: 'none',
@@ -475,7 +477,7 @@ function Footer() {
             </a>
             <span style={{ color: 'rgba(5, 150, 105, 0.8)' }}>|</span>
             <a
-              href='#'
+              href="/TermsOfService"
               style={{
                 color: '#d1fae5',
                 textDecoration: 'none',
@@ -488,7 +490,7 @@ function Footer() {
             </a>
             <span style={{ color: 'rgba(5, 150, 105, 0.8)' }}>|</span>
             <a
-              href='#'
+              href="/Sitemap"
               style={{
                 color: '#d1fae5',
                 textDecoration: 'none',
@@ -516,3 +518,5 @@ function Footer() {
 }
 
 export default Footer;
+
+

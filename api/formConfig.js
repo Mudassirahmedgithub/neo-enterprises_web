@@ -73,4 +73,52 @@ export const formConfigs = {
     subject: 'New Contact Page Enquiry',
     requiredFields: ['name', 'email', 'mobile', 'product', 'granite', 'details'],
   },
+  Chocolate_lapotra: {
+    sheetName: 'Granites',
+    mailTo: 'neoenterprises1979@gmail.com',
+    subject: 'Neo Chocolate Granite Enquiry',
+    requiredFields: ['name', 'email', 'mobile', 'quantity', 'purpose','countryCode','requirement'],
+  },
+  Black_Shade: {
+    sheetName: 'Granites',
+    mailTo: 'neoenterprises1979@gmail.com',
+    subject: 'Black Shade Granite Enquiry',
+    requiredFields: ['name', 'email', 'mobile', 'quantity', 'purpose','countryCode','requirement'],
+  },
+  StarBlue: {
+    sheetName: 'Granites',
+    mailTo: 'neoenterprises1979@gmail.com',
+    subject: 'Star Blue Granite Enquiry',
+    requiredFields: ['name', 'email', 'mobile', 'quantity', 'purpose','countryCode','requirement'],
+  },
+  TanBlue: {
+    sheetName: 'Granites',
+    mailTo: 'neoenterprises1979@gmail.com',
+    subject: 'Tan Blue Granite Enquiry',
+    requiredFields: ['name', 'email', 'mobile', 'quantity', 'purpose','countryCode','requirement'],
+  },
+  TanRed: {
+    sheetName: 'Granites',
+    mailTo: 'neoenterprises1979@gmail.com',
+    subject: 'Tan Red Granite Enquiry',
+    requiredFields: ['name', 'email', 'mobile', 'quantity', 'purpose','countryCode','requirement'],
+  }, 
+  TigerShade: {
+    sheetName: 'Granites',
+    mailTo: 'neoenterprises1979@gmail.com',
+    subject: 'Tiger Shade Granite Enquiry',
+    requiredFields: ['name', 'email', 'mobile', 'quantity', 'purpose','countryCode','requirement'],
+  },
+  TomatoRed: {
+    sheetName: 'Granites',
+    mailTo: 'neoenterprises1979@gmail.com',
+    subject: 'Tomato Red Granite Enquiry',
+    requiredFields: ['name', 'email', 'mobile', 'quantity', 'purpose','countryCode','requirement'],
+  },
+  NeokTize: {
+    sheetName: 'Granites',
+    mailTo: 'neoenterprises1979@gmail.com',
+    subject: 'Neo k Tize Granite Enquiry',
+    requiredFields: ['name', 'email', 'mobile', 'quantity', 'purpose','countryCode','requirement'],
+  },   
 };
