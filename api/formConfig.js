@@ -3,7 +3,7 @@
 export const formConfigs = {
   testimonial: {
     sheetName: 'Testimonials', // unified sheet for all forms
-    mailTo: 'mudassirahmed915171@gmail.com',
+    mailTo: 'neoenterprises1979@gmail.com',
     subject: 'New Testimonial Submitted',
     requiredFields: [
       'Name',
@@ -20,7 +20,7 @@ export const formConfigs = {
 
   QuickEnquiry: {
     sheetName: 'Contact & Home',
-    mailTo: 'muddusam1234@gmail.com',
+    mailTo: 'neoenterprises1979@gmail.com',
     subject: 'New Quick Enquiry',
     requiredFields: ['name', 'email', 'mobile', 'message', 'product','country'],
   },
