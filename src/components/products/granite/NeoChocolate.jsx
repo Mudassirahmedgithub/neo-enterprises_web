@@ -1,7 +1,43 @@
 import React, { useState } from 'react';
 import { countryCodes } from '@/utils/countryCodes';
  // keep your existing helper if already in place
+export async function submitForm(formType, formData, setStatus, resetForm) {
+  setStatus({ loading: true, success: null, error: null });
 
+  try {
+    const res = await fetch('/api/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ formType, formData }),
+    });
+
+    const text = await res.text();
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      throw new Error('Server returned invalid JSON. Check backend route.');
+    }
+
+    if (data.success) {
+      setStatus({
+        loading: false,
+        success: 'Form submitted successfully!',
+        error: null,
+      });
+      resetForm();
+    } else {
+      throw new Error(data.message || 'Submission failed');
+    }
+  } catch (err) {
+    console.error('Form submission error:', err);
+    setStatus({
+      loading: false,
+      success: null,
+      error: err.message || 'Something went wrong while submitting.',
+    });
+  }
+}
 export default function GraniteNeoChocolate() {
   const phone = '+91 88866 68873';
   const email = 'neoenterprises1979@gmail.com';
@@ -32,7 +68,7 @@ export default function GraniteNeoChocolate() {
       ...form,
       mobile: `${form.countryCode} ${form.mobile}`,
     };
-    submitForm('GraniteNeoChocolateEnquiry', formData, setStatus, () =>
+    submitForm('Chocolate_lapotra', formData, setStatus, () =>
       setForm({
         name: '',
         email: '',
