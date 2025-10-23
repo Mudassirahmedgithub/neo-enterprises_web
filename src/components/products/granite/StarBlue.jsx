@@ -68,9 +68,9 @@ export default function StarBlue() {
       img: '/images/products/k_tize.JPG',
     },
     {
-      title: 'Star Blue',
-      href: '/products/granite/StarBlue',
-      img: '/images/products/star_blue.JPG',
+      title: 'Neo Chocolate lapotra',
+      href: '/products/granite/NeoChocolate',
+      img: '/images/products/chocolata-lapota1.JPG',
     },
     {
       title: 'Neo Tan Blue',
@@ -80,7 +80,7 @@ export default function StarBlue() {
     {
       title: 'Neo Tan Red',
       href: '/products/granite/NeoTanRed',
-      img: '/images/products/tan_blue.JPG',
+      img: '/images/products/tan_red.JPG',
     },
   ];
 
@@ -91,9 +91,9 @@ export default function StarBlue() {
           {/* Left: Image */}
           <div className='md:w-1/2 w-full overflow-hidden'>
             <img
-              src='/images/products/chocolata-lapota.JPG'
+              src='/images/products/star_blue1.JPG'
               alt='Granite Neo Chocolate'
-              className='w-full h-3/4 object-cover md:h-[400px] transform transition-transform duration-500 hover:scale-110 cursor-pointer'
+              className='w-full h-full object-cover md:h-[400px] transform transition-transform duration-500 hover:scale-110 cursor-pointer'
             />
           </div>
 

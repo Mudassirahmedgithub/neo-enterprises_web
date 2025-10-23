@@ -32,7 +32,7 @@ export default function GraniteNeoGalaxy() {
       ...form,
       mobile: `${form.countryCode} ${form.mobile}`,
     };
-    submitForm('GraniteNeoChocolateEnquiry', formData, setStatus, () =>
+    submitForm('Black_Shade', formData, setStatus, () =>
       setForm({
         name: '',
         email: '',
@@ -54,35 +54,36 @@ export default function GraniteNeoGalaxy() {
     },
     {
       title: 'Neo Tomato Red',
-      href: '/products/granite-steel-grey',
+      href: '/products/granite/NeoTomato',
       img: '/images/products/tomato-red.JPG',
     },
     {
-      title: 'Neo Galaxy Black',
-      href: '/products/granite-tan-brown.png',
-      img: '/images/products/black_shade.JPG',
+      title: 'Neo Chocolate lapotra',
+      href: '/products/granite/NeoChocolate',
+      img: '/images/products/chocolata-lapota1.JPG',
     },
     {
       title: 'Neo K Tize',
-      href: '/products/granite-moon-white',
+      href: '/products/granite/NeoKTize',
       img: '/images/products/k_tize.JPG',
     },
     {
       title: 'Star Blue',
-      href: '/products/granite-vizag-blue',
+      href: '/products/granite/StarBlue',
       img: '/images/products/star_blue.JPG',
     },
     {
       title: 'Neo Tan Blue',
-      href: '/products/granite-coffee-brown',
+      href: '/products/granite/NeoTanBlue',
       img: '/images/products/tan_blue.JPG',
     },
     {
       title: 'Neo Tan Red',
-      href: '/products/granite-colonial-white',
-      img: '/images/products/tan_blue.JPG',
+      href: '/products/granite/NeoTanRed',
+      img: '/images/products/tan_red.JPG',
     },
   ];
+
 
   return (
     <div className='min-h-screen bg-gray-50 py-10 px-4'>
@@ -91,7 +92,7 @@ export default function GraniteNeoGalaxy() {
           {/* Left: Image */}
           <div className='md:w-1/2 w-full overflow-hidden'>
             <img
-              src='/images/products/chocolata-lapota.JPG'
+              src='/images/products/black_shade1.JPG'
               alt='Granite Neo Chocolate'
               className='w-full h-full object-cover md:h-[400px] transform transition-transform duration-500 hover:scale-110 cursor-pointer'
             />
@@ -100,7 +101,7 @@ export default function GraniteNeoGalaxy() {
           {/* Right: Details */}
           <div className='md:w-1/2 w-full p-8'>
             <h1 className='text-2xl font-semibold text-gray-900'>
-              Granite – Neo Chocolate
+              Granite – Neo Galaxy
             </h1>
             <p className='text-sm text-gray-600 mt-2'>
               Natural Granite | Premium quality slabs and tiles for architectural and interior excellence.
@@ -189,17 +190,24 @@ export default function GraniteNeoGalaxy() {
             </div>
 
             {/* Applications Box */}
-            <div className='bg-white p-8 border-2 border-gray-200 rounded-xl shadow-md mb-6'>
-              <h3 className='text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200'>
+            <div className="bg-white p-8 border-2 border-gray-200 rounded-xl shadow-md mb-6">
+              <h3 className="text-lg font-semibold text-gray-800 mb-6 pb-2 border-b border-gray-200">
                 Product Applications
               </h3>
-              <ul className='space-y-4 text-sm text-gray-700'>
-                <li>Perfect for luxury residential and commercial flooring.</li>
-                <li>Ideal choice for countertops, staircases, and kitchen islands.</li>
-                <li>Widely used in hotel lobbies, building facades, and high-end interiors.</li>
-                <li>Durable, easy to maintain, and resistant to heat and scratches.</li>
-                <li>Available in customized sizes and finishes as per project requirements.</li>
-              </ul>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-700 text-sm">
+                <ul className="space-y-4">
+                  <li>Perfect for luxury residential and commercial flooring.</li>
+                  <li>Ideal choice for countertops, staircases, and kitchen islands.</li>
+                  <li>Durable, easy to maintain, and resistant to heat and scratches.</li>
+                </ul>
+
+                <ul className="space-y-4">
+                  <li>Widely used in hotel lobbies, building facades, and high-end interiors.</li>
+                  <li>Available in customized sizes and finishes as per project requirements.</li>
+                  <li>Enhances aesthetic appeal in both modern and traditional designs.</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -208,7 +216,7 @@ export default function GraniteNeoGalaxy() {
         <div className='p-8 border-t'>
           <div className='max-w-4xl mx-auto'>
             <h3 className='text-xl font-semibold text-gray-900'>
-              Looking for "Granite – Neo Chocolate" ?
+              Looking for "Granite – Neo Galaxy" ?
             </h3>
 
             <form

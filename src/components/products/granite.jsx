@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 const graniteCategories = [
   {
     name: 'Neo Chocolate Lapotra',
-    img: '/images/products/chocolata-lapota.JPG',
+    img: '/images/products/chocolata-lapota1.JPG',
     link: '/products/granite/NeoChocolate',
     desc: 'Rich chocolate tone with subtle texture and premium finish.',
   },
   {
     name: 'Neo Tiger Shade',
-    img: '/images/products/tiger.JPG',
+    img: '/images/products/tiger1.JPG',
     link: '/products/granite/NeoTigerShade',
     desc: 'Distinctive tiger pattern granite that adds boldness to interiors.',
   },
@@ -22,31 +22,31 @@ const graniteCategories = [
   },
   {
     name: 'Neo Galaxy Black',
-    img: '/images/products/black_shade.JPG',
+    img: '/images/products/black_shade1.JPG',
     link: '/products/granite/NeoGalaxy',
     desc: 'Elegant black granite with shimmering silver specks.',
   },
   {
     name: 'Neo K Tize',
-    img: '/images/products/k_tize.JPG',
+    img: '/images/products/k_tize1.JPG',
     link: '/products/granite/NeokTize',
     desc: 'Stylish modern granite with a unique speckled texture.',
   },
   {
     name: 'Star Blue',
-    img: '/images/products/star_blue.JPG',
+    img: '/images/products/star_blue1.JPG',
     link: '/products/granite/StarBlue',
     desc: 'Deep blue granite that radiates sophistication and depth.',
   },
   {
     name: 'Neo Tan Blue',
-    img: '/images/products/tan_blue.JPG',
+    img: '/images/products/tan_blue1.JPG',
     link: '/products/granite/NeoTanBlue',
     desc: 'Soft bluish-tan granite ideal for calm and elegant spaces.',
   },
   {
     name: 'Neo Tan Red',
-    img: '/images/products/tan_red.JPG',
+    img: '/images/products/tan_red1.JPG',
     link: '/products/granite/NeoTanRed',
     desc: 'Warm reddish granite offering a timeless natural appeal.',
   },
