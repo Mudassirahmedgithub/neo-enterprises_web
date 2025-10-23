@@ -1,14 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
 import {
   Phone,
   Mail,
   MapPin,
+  Youtube,
   Facebook,
   Instagram,
-  Linkedin,
-  Twitter,
   ChevronRight,
 } from 'lucide-react';
 
@@ -43,7 +40,7 @@ function Footer() {
             borderRadius: '50%',
             filter: 'blur(80px)',
           }}
-        ></div>
+        />
         <div
           style={{
             position: 'absolute',
@@ -55,7 +52,7 @@ function Footer() {
             borderRadius: '50%',
             filter: 'blur(80px)',
           }}
-        ></div>
+        />
         <div
           style={{
             position: 'absolute',
@@ -67,7 +64,7 @@ function Footer() {
             borderRadius: '50%',
             filter: 'blur(80px)',
           }}
-        ></div>
+        />
       </div>
 
       {/* Leaf Pattern Overlay */}
@@ -80,7 +77,7 @@ function Footer() {
           backgroundSize: '60px 60px',
           pointerEvents: 'none',
         }}
-      ></div>
+      />
 
       <div
         style={{
@@ -90,7 +87,7 @@ function Footer() {
           padding: '8px 24px',
         }}
       >
-        {/* Main Footer Content */}
+        {/* Main Footer Grid */}
         <div
           style={{
             display: 'grid',
@@ -99,35 +96,41 @@ function Footer() {
             marginBottom: '40px',
           }}
         >
-          {/* Company Info Section */}
+          {/* Company Info */}
           <div>
             <div
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '8px',
+                gap: '12px',
                 marginBottom: '16px',
+                flexWrap: 'wrap',
               }}
             >
-              <div
+              <img
+                src="/favicon-96x96.png"
+                alt="Neo Enterprises Logo"
                 style={{
-                  width: '48px',
-                  height: '48px',
-                  background:
-                    'linear-gradient(135deg, #34d399 0%, #10b981 100%)',
+                  width: '40px',
+                  height: '40px',
                   borderRadius: '8px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
+                  objectFit: 'cover',
                   boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
                 }}
+              />
+              <h3
+                style={{
+                  fontSize: '24px',
+                  fontWeight: 'bold',
+                  margin: 0,
+                  color: 'white',
+                  lineHeight: 1.2,
+                }}
               >
-                <span style={{ fontSize: '24px', fontWeight: 'bold' }}>NE</span>
-              </div>
-              <h3 style={{ fontSize: '24px', fontWeight: 'bold', margin: 0 }}>
-                Neo Enterprises
+                NEO ENTERPRISES
               </h3>
             </div>
+
             <p
               style={{
                 color: '#d1fae5',
@@ -136,14 +139,36 @@ function Footer() {
                 marginBottom: '16px',
               }}
             >
-              Your trusted partner for premium quality agricultural products and
-              spices since 2022.
+              Your trusted partner for premium quality agricultural products and spices since 2022.
             </p>
+
+            {/* Social Media Links */}
             <div style={{ display: 'flex', gap: '12px', marginTop: '16px' }}>
-              {[Facebook, Instagram, Linkedin, Twitter].map((Icon, idx) => (
+              {[
+                { icon: Facebook, link: 'https://facebook.com/YourPage' },
+                { icon: Instagram, link: 'https://www.instagram.com/theneoenterprises' },
+                {
+                  icon: () => (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      width="24"
+                      height="24"
+                      style={{ display: 'block' }}
+                    >
+                      <path d="M23.498 6.186a2.996 2.996 0 0 0-2.111-2.12C19.465 3.5 12 3.5 12 3.5s-7.465 0-9.387.566a2.996 2.996 0 0 0-2.111 2.12A31.54 31.54 0 0 0 0 12a31.54 31.54 0 0 0 .502 5.814 2.996 2.996 0 0 0 2.111 2.12C4.535 20.5 12 20.5 12 20.5s7.465 0 9.387-.566a2.996 2.996 0 0 0 2.111-2.12A31.54 31.54 0 0 0 24 12a31.54 31.54 0 0 0-.502-5.814ZM9.75 15.02V8.98L15.75 12l-6 3.02Z"/>
+                    </svg>
+                  ),
+                  link: 'https://youtube.com/YourChannel',
+                }
+
+              ].map(({ icon: Icon, link }, idx) => (
                 <a
                   key={idx}
-                  href='#'
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   style={{
                     width: '40px',
                     height: '40px',
@@ -189,9 +214,10 @@ function Footer() {
                   background: '#34d399',
                   marginRight: '8px',
                 }}
-              ></div>
+              />
               Quick Links
             </h3>
+
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
               {[
                 { name: 'Home', path: '/' },
@@ -211,12 +237,8 @@ function Footer() {
                       alignItems: 'center',
                       transition: 'color 0.2s ease',
                     }}
-                    onMouseEnter={(e) =>
-                      (e.currentTarget.style.color = '#a7f3d0')
-                    }
-                    onMouseLeave={(e) =>
-                      (e.currentTarget.style.color = '#d1fae5')
-                    }
+                    onMouseEnter={(e) => (e.currentTarget.style.color = '#a7f3d0')}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = '#d1fae5')}
                   >
                     <ChevronRight size={16} style={{ marginRight: '4px' }} />
                     {link.name}
@@ -244,9 +266,10 @@ function Footer() {
                   background: '#34d399',
                   marginRight: '8px',
                 }}
-              ></div>
+              />
               Our Products
             </h3>
+
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
               {[
                 { name: 'Flax Seeds', path: '/products/flax' },
@@ -269,12 +292,8 @@ function Footer() {
                       alignItems: 'center',
                       transition: 'color 0.2s ease',
                     }}
-                    onMouseEnter={(e) =>
-                      (e.currentTarget.style.color = '#a7f3d0')
-                    }
-                    onMouseLeave={(e) =>
-                      (e.currentTarget.style.color = '#d1fae5')
-                    }
+                    onMouseEnter={(e) => (e.currentTarget.style.color = '#a7f3d0')}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = '#d1fae5')}
                   >
                     <ChevronRight size={16} style={{ marginRight: '4px' }} />
                     {product.name}
@@ -302,76 +321,95 @@ function Footer() {
                   background: '#34d399',
                   marginRight: '8px',
                 }}
-              ></div>
+              />
               Contact Us
             </h3>
-            <div
-              style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
-            >
-              <a
-                href='tel:+918886668873'
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+              {/* Phone Section */}
+              <div
                 style={{
                   display: 'flex',
-                  gap: '12px',
+                  alignItems: 'flex-start',
+                  gap: '14px',
                   color: '#d1fae5',
-                  textDecoration: 'none',
-                  transition: 'color 0.2s ease',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = '#a7f3d0')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = '#d1fae5')}
               >
                 <div
                   style={{
-                    width: '40px',
-                    height: '40px',
-                    background: 'rgba(5, 150, 105, 0.5)',
-                    borderRadius: '8px',
+                    width: '42px',
+                    height: '42px',
+                    background: 'rgba(5,150,105,0.6)',
+                    borderRadius: '10px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    flexShrink: 0,
                   }}
                 >
                   <Phone size={18} />
                 </div>
-                <div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0px' }}>
                   <p
                     style={{
-                      fontSize: '12px',
+                      fontSize: '13px',
                       color: '#a7f3d0',
-                      margin: '0 0 4px 0',
+                      margin: 0,
                     }}
                   >
                     Call Us
                   </p>
-                  <p style={{ fontSize: '14px', fontWeight: '500', margin: 0 }}>
+                  <a
+                    href="tel:+918886668873"
+                    style={{
+                      fontSize: '15px',
+                      fontWeight: '600',
+                      color: '#d1fae5',
+                      textDecoration: 'none',
+                      transition: 'color 0.2s ease',
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = '#a7f3d0')}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = '#d1fae5')}
+                  >
                     +91 88866 68873
-                  </p>
+                  </a>
+                  <a
+                    href="tel:+917382114411"
+                    style={{
+                      fontSize: '15px',
+                      fontWeight: '600',
+                      color: '#d1fae5',
+                      textDecoration: 'none',
+                      transition: 'color 0.2s ease',
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = '#a7f3d0')}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = '#d1fae5')}
+                  >
+                    +91 73821 14411
+                  </a>
                 </div>
-              </a>
+              </div>
 
+              {/* Email */}
               <a
-                href='mailto:neoenterprises1979@gmail.com'
+                href="mailto:neoenterprises1979@gmail.com"
                 style={{
                   display: 'flex',
-                  gap: '12px',
+                  alignItems: 'center',
+                  gap: '14px',
                   color: '#d1fae5',
                   textDecoration: 'none',
-                  transition: 'color 0.2s ease',
+                  transition: 'all 0.2s ease',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = '#a7f3d0')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = '#d1fae5')}
               >
                 <div
                   style={{
-                    width: '40px',
-                    height: '40px',
-                    background: 'rgba(5, 150, 105, 0.5)',
-                    borderRadius: '8px',
+                    width: '42px',
+                    height: '42px',
+                    background: 'rgba(5,150,105,0.6)',
+                    borderRadius: '10px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    flexShrink: 0,
                   }}
                 >
                   <Mail size={18} />
@@ -379,19 +417,19 @@ function Footer() {
                 <div>
                   <p
                     style={{
-                      fontSize: '12px',
+                      fontSize: '13px',
                       color: '#a7f3d0',
-                      margin: '0 0 4px 0',
+                      margin: '0 0 0px 0',
                     }}
                   >
                     Email Us
                   </p>
                   <p
                     style={{
-                      fontSize: '14px',
-                      fontWeight: '500',
+                      fontSize: '15px',
+                      fontWeight: '600',
                       margin: 0,
-                      wordBreak: 'break-all',
+                      wordBreak: 'break-word',
                     }}
                   >
                     neoenterprises1979@gmail.com
@@ -399,17 +437,24 @@ function Footer() {
                 </div>
               </a>
 
-              <div style={{ display: 'flex', gap: '12px', color: '#d1fae5' }}>
+              {/* Location */}
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '14px',
+                  color: '#d1fae5',
+                }}
+              >
                 <div
                   style={{
-                    width: '40px',
-                    height: '40px',
-                    background: 'rgba(5, 150, 105, 0.5)',
-                    borderRadius: '8px',
+                    width: '42px',
+                    height: '42px',
+                    background: 'rgba(5,150,105,0.6)',
+                    borderRadius: '10px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    flexShrink: 0,
                   }}
                 >
                   <MapPin size={18} />
@@ -417,15 +462,21 @@ function Footer() {
                 <div>
                   <p
                     style={{
-                      fontSize: '12px',
+                      fontSize: '13px',
                       color: '#a7f3d0',
-                      margin: '0 0 4px 0',
+                      margin: '0 0 0px 0',
                     }}
                   >
                     Location
                   </p>
-                  <p style={{ fontSize: '14px', fontWeight: '500', margin: 0 }}>
-                    Hyderabad, India
+                  <p
+                    style={{
+                      fontSize: '15px',
+                      fontWeight: '600',
+                      margin: 0,
+                    }}
+                  >
+                    Hyderabad, India <br /> Karimnagar, India
                   </p>
                 </div>
               </div>
@@ -436,10 +487,10 @@ function Footer() {
         {/* Divider */}
         <div
           style={{
-            borderTop: '1px solid rgba(5, 150, 105, 0.5)',
+            borderTop: '1px solid rgba(5,150,105,0.5)',
             margin: '32px 0',
           }}
-        ></div>
+        />
 
         {/* Bottom Section */}
         <div
@@ -451,9 +502,9 @@ function Footer() {
           }}
         >
           <p style={{ color: '#d1fae5', fontSize: '14px', margin: 0 }}>
-            &copy; {new Date().getFullYear()} Neo Enterprises. All rights
-            reserved.
+            &copy; {new Date().getFullYear()} Neo Enterprises. All rights reserved.
           </p>
+
           <div
             style={{
               display: 'flex',
@@ -463,60 +514,31 @@ function Footer() {
               justifyContent: 'center',
             }}
           >
-            <a
-              href="/PrivacyPolicy"
-              style={{
-                color: '#d1fae5',
-                textDecoration: 'none',
-                transition: 'color 0.2s ease',
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = '#a7f3d0')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = '#d1fae5')}
-            >
+            <a href="/PrivacyPolicy" style={{ color: '#d1fae5' }}>
               Privacy Policy
             </a>
-            <span style={{ color: 'rgba(5, 150, 105, 0.8)' }}>|</span>
-            <a
-              href="/TermsOfService"
-              style={{
-                color: '#d1fae5',
-                textDecoration: 'none',
-                transition: 'color 0.2s ease',
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = '#a7f3d0')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = '#d1fae5')}
-            >
+            <span style={{ color: 'rgba(5,150,105,0.8)' }}>|</span>
+            <a href="/TermsOfService" style={{ color: '#d1fae5' }}>
               Terms of Service
             </a>
-            <span style={{ color: 'rgba(5, 150, 105, 0.8)' }}>|</span>
-            <a
-              href="/Sitemap"
-              style={{
-                color: '#d1fae5',
-                textDecoration: 'none',
-                transition: 'color 0.2s ease',
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = '#a7f3d0')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = '#d1fae5')}
-            >
+            <span style={{ color: 'rgba(5,150,105,0.8)' }}>|</span>
+            <a href="/Sitemap" style={{ color: '#d1fae5' }}>
               Sitemap
             </a>
           </div>
         </div>
       </div>
 
-      {/* Bottom Accent Line */}
+      {/* Accent Line */}
       <div
         style={{
           height: '4px',
           background:
             'linear-gradient(90deg, #22c55e 0%, #10b981 50%, #22c55e 100%)',
         }}
-      ></div>
+      />
     </footer>
   );
 }
 
 export default Footer;
-
-
