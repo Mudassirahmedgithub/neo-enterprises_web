@@ -157,10 +157,15 @@ function ImageSlider() {
       </div>
 
       {/* Caption */}
-      <div className='absolute bottom-20 left-1/2 transform -translate-x-1/2 bg-white bg-opacity-90 px-8 py-4 rounded shadow-lg text-2xl font-semibold text-gray-900'>
+      <div className="
+        absolute bottom-10 left-1/2 transform -translate-x-1/2 
+        bg-white bg-opacity-90 px-6 py-3 rounded shadow-lg
+        text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900
+        max-w-[90%] text-center
+      ">
         <Link
           to={`/products/${sliderImages[current].slug}`}
-          className='hover:text-yellow-600'
+          className="hover:text-yellow-600 block truncate"
         >
           {sliderImages[current].caption}
         </Link>

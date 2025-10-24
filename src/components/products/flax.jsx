@@ -102,7 +102,7 @@ export default function Flax() {
           {/* Left: Image */}
           <div className='md:w-1/2 w-full overflow-hidden'>
             <img
-              src='/images/products/clove.png'
+              src='/images/products/flax-seeds.png'
               alt='Clove'
               className='w-full h-full object-cover md:h-[400px] transform transition-transform duration-500 hover:scale-110 cursor-pointer'
             />
