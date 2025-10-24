@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import countries from '../data/countries';
-
+import { Helmet } from 'react-helmet-async';
 // Image Slider Data
 const sliderImages = [
   {
@@ -260,204 +260,221 @@ export default function Home() {
   };
 
   return (
-    <main>
-      {/* Slider */}
-      <section className='bg-gray-100'>
-        <ImageSlider />
-      </section>
+    <>
+      <Helmet>
+        <title>Neo Enterprises — Leading Supplier & Exporter of Granite, Spices, and Agro Products</title>
+        <meta
+          name="description"
+          content="Welcome to Neo Enterprises, a trusted global exporter of premium granite, spices, and agro products. Explore our latest and most popular offerings across multiple categories."
+        />
+        <link rel="canonical" href="https://theneoenterprises.com/" />
+        <meta property="og:title" content="Neo Enterprises — Leading Supplier & Exporter of Granite, Spices, and Agro Products" />
+        <meta
+          property="og:description"
+          content="Explore Neo Enterprises’ world-class range of granite, spices, and agro products. Delivering quality and reliability worldwide."
+        />
+        <meta property="og:url" content="https://theneoenterprises.com/" />
+        <meta property="og:type" content="website" />
+      </Helmet>
+      <main>
+        {/* Slider */}
+        <section className='bg-gray-100'>
+          <ImageSlider />
+        </section>
 
-      {/* Latest Products */}
-      <section className='py-12 bg-white text-center'>
-        <h2 className='text-3xl font-bold mb-8 text-gray-800'>
-          Latest Products
-        </h2>
-        <div className='grid grid-cols-2 md:grid-cols-4 gap-6'>
-          {latestProducts.map((p) => (
-            <Link key={p.name} to={`/products/${p.slug}`} className='group'>
-              <div className='bg-white rounded-lg shadow-md p-4 hover:shadow-xl hover:scale-105 transition-all border border-gray-200'>
-                <div className='overflow-hidden rounded-md mb-3'>
-                  <img
-                    src={p.src}
-                    alt={p.name}
-                    className='w-full h-32 object-cover group-hover:scale-110 transition-transform'
-                  />
-                </div>
-                <div className='font-semibold text-gray-700 group-hover:text-yellow-600'>
-                  {p.name}
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* Popular Products */}
-      <section className='py-12 bg-gray-50 text-center'>
-        <h2 className='text-3xl font-bold mb-8 text-gray-800'>
-          Popular Products
-        </h2>
-        <div className='grid grid-cols-2 md:grid-cols-4 gap-6'>
-          {popularProducts.map((p) => (
-            <Link key={p.name} to={`/products/${p.slug}`} className='group'>
-              <div className='bg-white rounded-lg shadow-md p-4 hover:shadow-xl hover:scale-105 transition-all border border-gray-200'>
-                <div className='overflow-hidden rounded-md mb-3'>
-                  <img
-                    src={p.src}
-                    alt={p.name}
-                    className='w-full h-32 object-cover group-hover:scale-110 transition-transform'
-                  />
-                </div>
-                <div className='font-semibold text-gray-700 group-hover:text-yellow-600'>
-                  {p.name}
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* Quick Enquiry */}
-      <section className='py-12 bg-white'>
-        <div className='container mx-auto'>
-          <h2 className='text-3xl font-bold mb-8 text-center text-gray-800'>
-            Quick Enquiry
+        {/* Latest Products */}
+        <section className='py-12 bg-white text-center'>
+          <h2 className='text-3xl font-bold mb-8 text-gray-800'>
+            Latest Products
           </h2>
-          <div className='flex flex-col lg:flex-row items-center justify-center gap-8 max-w-6xl mx-auto'>
-            {/* Image */}
-            <div className='lg:w-1/2 w-full'>
-              <img
-                src='/images/products/enquiry.png'
-                alt='Enquiry'
-                className='rounded-lg shadow-xl w-full h-64 lg:h-96 object-cover'
-              />
-            </div>
-
-            {/* Form */}
-            <div className='lg:w-1/2 w-full'>
-              <form
-                onSubmit={handleSubmit}
-                className='space-y-6 bg-white p-6 rounded-xl shadow-md'
-              >
-                <div>
-                  <label className='block text-sm font-semibold text-gray-700 mb-2'>
-                    Product / Service Looking for{' '}
-                    <span className='text-red-500'>*</span>
-                  </label>
-                  <input
-                    name='product'
-                    type='text'
-                    value={formData.product}
-                    onChange={handleChange}
-                    placeholder='E.g. Clove, Granite, Flax Seeds...'
-                    className='w-full border-2 border-gray-200 p-3.5 rounded-xl focus:border-green-500 bg-gray-50 hover:bg-white'
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className='block text-sm font-semibold text-gray-700 mb-2'>
-                    Select Country <span className='text-red-500'>*</span>
-                  </label>
-                  <select
-                    name='country'
-                    value={formData.country}
-                    onChange={handleChange}
-                    className='w-full border-2 border-gray-200 p-3.5 rounded-xl focus:border-green-500 bg-gray-50 hover:bg-white'
-                    required
-                  >
-                    <option value=''>-- Select Country --</option>
-                    {countries.map((c, i) => (
-                      <option key={i} value={c}>
-                        {c}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className='grid md:grid-cols-2 gap-6'>
-                  <div>
-                    <label className='block text-sm font-semibold text-gray-700 mb-2'>
-                      Your Name <span className='text-red-500'>*</span>
-                    </label>
-                    <input
-                      name='name'
-                      type='text'
-                      value={formData.name}
-                      onChange={handleChange}
-                      placeholder='John Doe'
-                      className='w-full border-2 border-gray-200 p-3.5 rounded-xl focus:border-green-500 bg-gray-50 hover:bg-white'
-                      required
+          <div className='grid grid-cols-2 md:grid-cols-4 gap-6'>
+            {latestProducts.map((p) => (
+              <Link key={p.name} to={`/products/${p.slug}`} className='group'>
+                <div className='bg-white rounded-lg shadow-md p-4 hover:shadow-xl hover:scale-105 transition-all border border-gray-200'>
+                  <div className='overflow-hidden rounded-md mb-3'>
+                    <img
+                      src={p.src}
+                      alt={p.name}
+                      className='w-full h-32 object-cover group-hover:scale-110 transition-transform'
                     />
                   </div>
-                  <div>
-                    <label className='block text-sm font-semibold text-gray-700 mb-2'>
-                      Email <span className='text-red-500'>*</span>
-                    </label>
-                    <input
-                      name='email'
-                      type='email'
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder='john@example.com'
-                      className='w-full border-2 border-gray-200 p-3.5 rounded-xl focus:border-green-500 bg-gray-50 hover:bg-white'
-                      required
-                    />
+                  <div className='font-semibold text-gray-700 group-hover:text-yellow-600'>
+                    {p.name}
                   </div>
                 </div>
+              </Link>
+            ))}
+          </div>
+        </section>
 
-                <div>
-                  <label className='block text-sm font-semibold text-gray-700 mb-2'>
-                    Mobile Number <span className='text-red-500'>*</span>
-                  </label>
-                  <input
-                    name='mobile'
-                    type='tel'
-                    value={formData.mobile}
-                    onChange={handleChange}
-                    placeholder='+91 98765 43210'
-                    className='w-full border-2 border-gray-200 p-3.5 rounded-xl focus:border-green-500 bg-gray-50 hover:bg-white'
-                    required
-                  />
+        {/* Popular Products */}
+        <section className='py-12 bg-gray-50 text-center'>
+          <h2 className='text-3xl font-bold mb-8 text-gray-800'>
+            Popular Products
+          </h2>
+          <div className='grid grid-cols-2 md:grid-cols-4 gap-6'>
+            {popularProducts.map((p) => (
+              <Link key={p.name} to={`/products/${p.slug}`} className='group'>
+                <div className='bg-white rounded-lg shadow-md p-4 hover:shadow-xl hover:scale-105 transition-all border border-gray-200'>
+                  <div className='overflow-hidden rounded-md mb-3'>
+                    <img
+                      src={p.src}
+                      alt={p.name}
+                      className='w-full h-32 object-cover group-hover:scale-110 transition-transform'
+                    />
+                  </div>
+                  <div className='font-semibold text-gray-700 group-hover:text-yellow-600'>
+                    {p.name}
+                  </div>
                 </div>
+              </Link>
+            ))}
+          </div>
+        </section>
 
-                <div>
-                  <label className='block text-sm font-semibold text-gray-700 mb-2'>
-                    Message <span className='text-red-500'>*</span>
-                  </label>
-                  <textarea
-                    name='message'
-                    rows={5}
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder='Please provide details about your requirements...'
-                    className='w-full border-2 border-gray-200 p-3.5 rounded-xl focus:border-green-500 bg-gray-50 hover:bg-white resize-none'
-                    required
-                  />
-                </div>
+        {/* Quick Enquiry */}
+        <section className='py-12 bg-white'>
+          <div className='container mx-auto'>
+            <h2 className='text-3xl font-bold mb-8 text-center text-gray-800'>
+              Quick Enquiry
+            </h2>
+            <div className='flex flex-col lg:flex-row items-center justify-center gap-8 max-w-6xl mx-auto'>
+              {/* Image */}
+              <div className='lg:w-1/2 w-full'>
+                <img
+                  src='/images/products/enquiry.png'
+                  alt='Enquiry'
+                  className='rounded-lg shadow-xl w-full h-64 lg:h-96 object-cover'
+                />
+              </div>
 
-                <button
-                  type='submit'
-                  disabled={status.loading}
-                  className='w-full bg-gradient-to-r from-green-700 to-green-600 text-white py-4 rounded-xl font-semibold hover:from-green-800 hover:to-green-700 transition-all shadow-lg'
+              {/* Form */}
+              <div className='lg:w-1/2 w-full'>
+                <form
+                  onSubmit={handleSubmit}
+                  className='space-y-6 bg-white p-6 rounded-xl shadow-md'
                 >
-                  {status.loading ? 'Sending...' : 'Send Enquiry'}
-                </button>
+                  <div>
+                    <label className='block text-sm font-semibold text-gray-700 mb-2'>
+                      Product / Service Looking for{' '}
+                      <span className='text-red-500'>*</span>
+                    </label>
+                    <input
+                      name='product'
+                      type='text'
+                      value={formData.product}
+                      onChange={handleChange}
+                      placeholder='E.g. Clove, Granite, Flax Seeds...'
+                      className='w-full border-2 border-gray-200 p-3.5 rounded-xl focus:border-green-500 bg-gray-50 hover:bg-white'
+                      required
+                    />
+                  </div>
 
-                {status.success && (
-                  <p className='text-green-600 font-medium text-center'>
-                    {status.success}
-                  </p>
-                )}
-                {status.error && (
-                  <p className='text-red-600 font-medium text-center'>
-                    {status.error}
-                  </p>
-                )}
-              </form>
+                  <div>
+                    <label className='block text-sm font-semibold text-gray-700 mb-2'>
+                      Select Country <span className='text-red-500'>*</span>
+                    </label>
+                    <select
+                      name='country'
+                      value={formData.country}
+                      onChange={handleChange}
+                      className='w-full border-2 border-gray-200 p-3.5 rounded-xl focus:border-green-500 bg-gray-50 hover:bg-white'
+                      required
+                    >
+                      <option value=''>-- Select Country --</option>
+                      {countries.map((c, i) => (
+                        <option key={i} value={c}>
+                          {c}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className='grid md:grid-cols-2 gap-6'>
+                    <div>
+                      <label className='block text-sm font-semibold text-gray-700 mb-2'>
+                        Your Name <span className='text-red-500'>*</span>
+                      </label>
+                      <input
+                        name='name'
+                        type='text'
+                        value={formData.name}
+                        onChange={handleChange}
+                        placeholder='John Doe'
+                        className='w-full border-2 border-gray-200 p-3.5 rounded-xl focus:border-green-500 bg-gray-50 hover:bg-white'
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className='block text-sm font-semibold text-gray-700 mb-2'>
+                        Email <span className='text-red-500'>*</span>
+                      </label>
+                      <input
+                        name='email'
+                        type='email'
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder='john@example.com'
+                        className='w-full border-2 border-gray-200 p-3.5 rounded-xl focus:border-green-500 bg-gray-50 hover:bg-white'
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className='block text-sm font-semibold text-gray-700 mb-2'>
+                      Mobile Number <span className='text-red-500'>*</span>
+                    </label>
+                    <input
+                      name='mobile'
+                      type='tel'
+                      value={formData.mobile}
+                      onChange={handleChange}
+                      placeholder='+91 98765 43210'
+                      className='w-full border-2 border-gray-200 p-3.5 rounded-xl focus:border-green-500 bg-gray-50 hover:bg-white'
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label className='block text-sm font-semibold text-gray-700 mb-2'>
+                      Message <span className='text-red-500'>*</span>
+                    </label>
+                    <textarea
+                      name='message'
+                      rows={5}
+                      value={formData.message}
+                      onChange={handleChange}
+                      placeholder='Please provide details about your requirements...'
+                      className='w-full border-2 border-gray-200 p-3.5 rounded-xl focus:border-green-500 bg-gray-50 hover:bg-white resize-none'
+                      required
+                    />
+                  </div>
+
+                  <button
+                    type='submit'
+                    disabled={status.loading}
+                    className='w-full bg-gradient-to-r from-green-700 to-green-600 text-white py-4 rounded-xl font-semibold hover:from-green-800 hover:to-green-700 transition-all shadow-lg'
+                  >
+                    {status.loading ? 'Sending...' : 'Send Enquiry'}
+                  </button>
+
+                  {status.success && (
+                    <p className='text-green-600 font-medium text-center'>
+                      {status.success}
+                    </p>
+                  )}
+                  {status.error && (
+                    <p className='text-red-600 font-medium text-center'>
+                      {status.error}
+                    </p>
+                  )}
+                </form>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
+    </>  
   );
 }
