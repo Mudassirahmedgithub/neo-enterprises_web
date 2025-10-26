@@ -1,0 +1,6 @@
+# Allow all web crawlers
+User-agent: *
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://www.theneoenterprises.com/sitemap.xml

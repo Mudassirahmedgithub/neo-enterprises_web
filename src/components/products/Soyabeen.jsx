@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // Place this ABOVE your component
 import { countryCodes } from '@/utils/countryCodes';
-
+import { Helmet } from 'react-helmet-async';
 export async function submitForm(formType, formData, setStatus, resetForm) {
   setStatus({ loading: true, success: null, error: null });
 
@@ -127,14 +127,124 @@ export default function SoyabeanFlakes() {
     <>
       <Helmet>
         <title>
-          Our Products | Neo Enterprises — Leading Supplier and Exporter of Granite, Spices, and Agro Products
+          Soyabean Flakes Exporter from India | Neo Enterprises — Premium Quality High Protein Feed Ingredient
         </title>
         <meta
           name="description"
-          content="Explore Neo Enterprises' premium range of granite, spices, and agro products. Trusted globally for exceptional quality and reliability."
+          content="Neo Enterprises is a leading manufacturer and exporter of high-protein Soyabean Flakes from India. Ideal for poultry, dairy, aquaculture, and food industries, processed under strict quality standards."
         />
-        <link rel="canonical" href="https://theneoenterprises.com/products" />
-      </Helmet>    
+        <meta
+          name="keywords"
+          content="Soyabean Flakes exporter India, soy flakes supplier, high protein animal feed, soy flakes manufacturer, Neo Enterprises, soyabean flakes exporter, soy protein ingredient, cattle feed supplier"
+        />
+        <meta name="author" content="Neo Enterprises" />
+        <meta name="robots" content="index, follow" />
+
+        <meta property="og:title" content="Soyabean Flakes Exporter from India | Neo Enterprises" />
+        <meta
+          property="og:description"
+          content="Premium-quality Soyabean Flakes manufactured and exported by Neo Enterprises — trusted globally for high-protein animal feed and food-grade soy products."
+        />
+        <meta property="og:type" content="product" />
+        <meta property="og:url" content="https://theneoenterprises.com/products/soyabeanFlakes" />
+        <meta property="og:image" content="https://theneoenterprises.com/images/products/SoyabeanFlakes.png" />
+        <meta property="og:site_name" content="Neo Enterprises" />
+
+        <link rel="canonical" href="https://theneoenterprises.com/products/soyabeanFlakes" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Soyabean Flakes Exporter from India | Neo Enterprises" />
+        <meta
+          name="twitter:description"
+          content="Neo Enterprises exports premium Soyabean Flakes rich in protein and fiber — ideal for animal feed, food processing, and nutraceutical industries."
+        />
+        <meta name="twitter:image" content="https://theneoenterprises.com/images/products/SoyabeanFlakes.png" />
+
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org/",
+              "@type": "Product",
+              "name": "Soyabean Flakes",
+              "image": "https://theneoenterprises.com/images/products/SoyabeanFlakes.png",
+              "description": "High-quality Soyabean Flakes with 48% protein and low moisture, manufactured by Neo Enterprises. Widely used in animal feed, food processing, and nutraceutical industries.",
+              "brand": {
+                "@type": "Brand",
+                "name": "Neo Enterprises"
+              },
+              "manufacturer": {
+                "@type": "Organization",
+                "name": "Neo Enterprises",
+                "url": "https://theneoenterprises.com"
+              },
+              "offers": {
+                "@type": "Offer",
+                "availability": "https://schema.org/InStock",
+                "priceCurrency": "USD",
+                "url": "https://theneoenterprises.com/products/soyabeanFlakes"
+              },
+              "additionalProperty": [
+                {
+                  "@type": "PropertyValue",
+                  "name": "Protein",
+                  "value": "48% Approx"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "Crude Fiber",
+                  "value": "6% Max"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "Fat",
+                  "value": "1% Approx"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "Moisture",
+                  "value": "10% Max"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "Form",
+                  "value": "Flakes / Crumbled Flakes"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "Color",
+                  "value": "Light Cream to Yellowish"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "Packaging Type",
+                  "value": "PP Bags / Jute Bags"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "Container Size",
+                  "value": "20 Feet / Bulk"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "Country of Origin",
+                  "value": "India"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "Shelf Life",
+                  "value": "12 months"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "Use Case",
+                  "value": "Animal Feed, Food Processing, Nutraceuticals, Oil Extraction, Health Foods"
+                }
+              ]
+            }
+          `}
+        </script>
+      </Helmet>
+    
       <div className='min-h-screen bg-green-50 py-10 px-4'>
         <div className='max-w-6xl mx-auto bg-white shadow-md rounded-2xl overflow-hidden'>
           <div className='md:flex'>
